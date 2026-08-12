@@ -251,8 +251,9 @@
         }
         .admin-nav button.active { background: #4caf50; color: black; border-color: #4caf50; }
         
-        /* زر قسم المحظورين */
+        /* أزرار مخصصة في قسم الإدارة */
         #navBannedBtn.active { background: #d32f2f; color: white; border-color: #d32f2f; }
+        #navNotifyBtn.active { background: #ff9800; color: black; border-color: #ff9800; }
         
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; margin-bottom: 5px; color: #ccc; font-size: 13px; }
@@ -262,7 +263,7 @@
         }
         .btn { background: #4caf50; color: black; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 8px; }
         .btn-danger { background: #d32f2f; color: white; }
-        .btn-warning { background: #f57c00; color: white; }
+        .btn-warning { background: #ff9800; color: black; }
         .btn-blue { background: #1976d2; color: white; }
         .manage-search { width: 100%; padding: 8px 12px; background: #121212; border: 1px solid #444; color: white; border-radius: 8px; margin-bottom: 10px; font-size: 13px; outline: none; }
         .manage-list { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
@@ -293,6 +294,8 @@
                 <a href="#" class="back-btn" onclick="location.reload();">❯</a>
                 <img src="https://e.top4top.io/p_3874hbdrg1.jpg" class="app-logo" id="logoImg" alt="Logo" onclick="showLogoModal()">
             </div>
+            <!-- زر تفعيل الإشعارات للمستخدم -->
+            <button onclick="requestNotificationPermission()" style="background: none; border: none; color: #a3c2a8; font-size: 18px; cursor: pointer;">🔔</button>
         </div>
 
         <div class="logo-modal" id="logoModal" onclick="closeLogoModal()">
@@ -367,9 +370,10 @@
                 <div class="admin-nav">
                     <button id="navAddBtn" class="active" onclick="switchAdminTab('add')">➕ إضافة</button>
                     <button id="navEditBtn" onclick="switchAdminTab('edit')">✏️ تعديل</button>
-                    <button id="navReorderBtn" onclick="switchAdminTab('reorder')">⇄ الترتيب</button>
+                    <button id="navReorderBtn" onclick="switchAdminTab('reorder')">⇄ ترتيب</button>
                     <button id="navDeleteBtn" onclick="switchAdminTab('delete')">🗑️ حذف</button>
                     <button id="navBannedBtn" onclick="switchAdminTab('banned')">🚫 المحظورين</button>
+                    <button id="navNotifyBtn" onclick="switchAdminTab('notify')">🔔 الإشعارات</button>
                 </div>
 
                 <div id="addEditSection">
@@ -515,6 +519,21 @@
                     <div class="manage-list" id="bannedListContainer"></div>
                 </div>
 
+                <!-- قسم الإشعارات الجديد -->
+                <div id="notifySection" style="display: none;">
+                    <h3 style="margin-top:0; color:#ff9800;">إرسال إشعار للمستخدمين 🔔</h3>
+                    <div class="form-group">
+                        <label>عنوان الإشعار:</label>
+                        <input type="text" id="notifTitle" placeholder="مثال: بث مباشر جديد، أو مجلس جديد...">
+                    </div>
+                    <div class="form-group">
+                        <label>نص الإشعار:</label>
+                        <input type="text" id="notifBody" placeholder="اكتب تفاصيل الإشعار هنا...">
+                    </div>
+                    <button class="btn btn-warning" onclick="sendNotification()">إرسال الإشعار أونلاين 🚀</button>
+                    <p style="font-size:12px; color:#aaa; margin-top:10px; line-height: 1.5;">ملاحظة: سيظهر الإشعار للمستخدمين عند فتحهم للتطبيق وكانوا قد أعطوا صلاحية الإشعارات للمتصفح.</p>
+                </div>
+
                 <button class="btn btn-danger" style="margin-top:15px;" onclick="closeAdmin()">إغلاق اللوحة</button>
             </div>
         </div>
@@ -528,15 +547,69 @@
         let customTypesList = [];
         let customRecitersList = [];
         let customYearsList = [];
-        let bannedDevicesList = []; // مصفوفة الأجهزة المحظورة
+        let bannedDevicesList = []; 
+        let cachedLatestNotification = null; // متغير لحفظ الإشعار القادم من السيرفر
 
         let currentCategory = 'videos';
         let activePlaylistId = null;
-
         let selectedFilters = { months: [], years: [], types: [], reciters: [] };
         let currentActiveFilterType = null;
 
-        // --- نظام حظر الأجهزة ---
+        // طلب صلاحية إشعارات المتصفح
+        function requestNotificationPermission() {
+            if ("Notification" in window) {
+                if (Notification.permission === "granted") {
+                    alert("الإشعارات مفعلة بالفعل على جهازك! 🔔");
+                } else if (Notification.permission !== "denied") {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === "granted") alert("تم تفعيل الإشعارات بنجاح! 🔔");
+                    });
+                } else {
+                    alert("الإشعارات محظورة في هذا المتصفح، يرجى تفعيلها من إعدادات المتصفح.");
+                }
+            } else {
+                alert("متصفحك لا يدعم الإشعارات.");
+            }
+        }
+
+        // فحص وإظهار الإشعار إذا كان جديداً
+        function checkAndShowNotification() {
+            if (!cachedLatestNotification) return;
+            const lastSeenId = localStorage.getItem('last_seen_notif_id');
+            if (lastSeenId != cachedLatestNotification.id) {
+                if ("Notification" in window && Notification.permission === "granted") {
+                    new Notification(cachedLatestNotification.title, {
+                        body: cachedLatestNotification.body,
+                        icon: cachedLatestNotification.icon
+                    });
+                    localStorage.setItem('last_seen_notif_id', cachedLatestNotification.id);
+                }
+            }
+        }
+
+        // دالة إرسال الإشعار من الإدمن
+        function sendNotification() {
+            const title = document.getElementById('notifTitle').value.trim();
+            const body = document.getElementById('notifBody').value.trim();
+            if (!title) { alert('يرجى كتابة عنوان الإشعار!'); return; }
+
+            cachedLatestNotification = {
+                id: Date.now(),
+                title: title,
+                body: body,
+                icon: 'https://e.top4top.io/p_3874hbdrg1.jpg'
+            };
+
+            document.getElementById('notifTitle').value = '';
+            document.getElementById('notifBody').value = '';
+            document.getElementById('saveBtn').innerText = "جاري إرسال الإشعار..."; // استعارة زر للحالة
+            
+            syncOnlineData(() => {
+                document.getElementById('saveBtn').innerText = "نشر أونلاين فوراً ⚡";
+                alert("تم إرسال الإشعار بنجاح لجميع المستخدمين! 🔔");
+            });
+        }
+
         function getDeviceId() {
             let id = localStorage.getItem('app_device_id');
             if (!id) {
@@ -582,7 +655,6 @@
             }
         }
 
-        // دالة فحص وتأكيد كلمة المرور للدخول للتطبيق
         function checkAppPassword() {
             const deviceId = getDeviceId();
             if (bannedDevicesList.some(d => d.id === deviceId)) {
@@ -594,9 +666,7 @@
             const _0xkey = ['A','l',' ','S','h','a','b','a','w','i',' ','H','u','s','s','e','i','n','i','y',' ','M','u','h','a','m','m','a','d',' ','H','a','s','s','a','n',' ','A','b','d','u','l',' ','A','m','i','r','6','4','9','4','8','8','4','$','+','&','&',')',' ','$','-',')','_','-','_','(','_','+','+','$',')','+','$',')','-','_','»','-','«','•','•','«','•',')','_','/','/','♡','»','♡','»'];
             
             if (inputVal === _0xkey.join('')) {
-                localStorage.setItem('failed_attempts', '0'); // تصفير المحاولات عند النجاح
-                
-                // حفظ حالة تسجيل الدخول ليتم تخطيها في المرات القادمة
+                localStorage.setItem('failed_attempts', '0'); 
                 localStorage.setItem('is_logged_in', 'true'); 
                 
                 const loginScreen = document.getElementById('login-screen');
@@ -610,18 +680,12 @@
                 attempts++;
                 localStorage.setItem('failed_attempts', attempts.toString());
                 
-                if (attempts >= 10) {
-                    banCurrentDevice();
-                } else {
-                    const remaining = 10 - attempts;
-                    showLoginError(`كلمة المرور غير صحيحة! متبقي لك ${remaining} محاولات قبل الحظر.`);
-                }
+                if (attempts >= 10) banCurrentDevice();
+                else showLoginError(`كلمة المرور غير صحيحة! متبقي لك ${10 - attempts} محاولات قبل الحظر.`);
             }
         }
 
-        function handleLoginKeyPress(event) {
-            if (event.key === 'Enter') checkAppPassword();
-        }
+        function handleLoginKeyPress(event) { if (event.key === 'Enter') checkAppPassword(); }
 
         function fetchOnlineData(callback) {
             fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
@@ -638,9 +702,9 @@
                     customRecitersList = root.customReciters || [];
                     customYearsList = root.customYears || [];
                     bannedDevicesList = root.bannedDevices || [];
+                    cachedLatestNotification = root.latestNotification || null;
                 }
 
-                // التأكد فوراً إذا كان الجهاز محظوراً عند تحميل البيانات
                 if (bannedDevicesList.some(d => d.id === getDeviceId())) {
                     showLoginError("هذا الجهاز محظور من الدخول للتطبيق! 🚫", true);
                 }
@@ -654,6 +718,7 @@
                 populatePlaylistDropdown();
                 populateAdminDropdowns();
                 loadMedia();
+                checkAndShowNotification(); // استدعاء فحص الإشعارات عند جلب البيانات
                 if (callback) callback();
             })
             .catch(err => {
@@ -668,7 +733,8 @@
                 customTypes: customTypesList,
                 customReciters: customRecitersList,
                 customYears: customYearsList,
-                bannedDevices: bannedDevicesList
+                bannedDevices: bannedDevicesList,
+                latestNotification: cachedLatestNotification // حفظ الإشعار الجديد في قاعدة البيانات
             };
 
             fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
@@ -682,17 +748,14 @@
         }
 
         window.onload = function() {
-            // تخطي صفحة تسجيل الدخول إذا كان المستخدم قد سجل الدخول سابقاً بنجاح
             if (localStorage.getItem('is_logged_in') === 'true') {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-app-content').style.display = 'block';
             }
-
             fetchOnlineData(); 
             setupMediaSessionHandlers();
         };
 
-        // --- باقي دوال عرض التطبيق ---
         function populatePlaylistDropdown() {
             const select = document.getElementById('mediaPlaylistId');
             if (!select) return;
@@ -716,10 +779,7 @@
                 customYearsList.map(y => `<option value="${y}">${y}</option>`).join('') + '<option value="__NEW__">➕ إضافة سنة جديدة...</option>';
         }
 
-        function checkCustomInput(selectId, groupClass) {
-            document.getElementById(groupClass).style.display = (document.getElementById(selectId).value === '__NEW__') ? 'block' : 'none';
-        }
-
+        function checkCustomInput(selectId, groupClass) { document.getElementById(groupClass).style.display = (document.getElementById(selectId).value === '__NEW__') ? 'block' : 'none'; }
         function showLogoModal() { document.getElementById('logoModal').style.display = 'flex'; }
         function closeLogoModal() { document.getElementById('logoModal').style.display = 'none'; }
 
@@ -750,40 +810,34 @@
             document.getElementById('detailsType').innerText = item.type || "عام";
             document.getElementById('detailsModalOverlay').style.display = 'flex';
         }
-
         function closeDetailsModal() { document.getElementById('detailsModalOverlay').style.display = 'none'; }
 
-        // الدالة المحدثة الخاصة ببيانات إشعار الميديا
+        // التعديل الذي طلبته ليكون الإشعار مطابق للصورة تماماً
         function updateMediaSession(item, thumbSrc) {
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
-                    title: item.title,
-                    artist: 'حسينية الشعباوي',
-                    album: item.reciter ? `الرادود: ${item.reciter}` : 'تطبيق حسينية الشعباوي',
+                    title: item.title, // عنوان المجلس كعنوان رئيسي
+                    artist: 'تطبيق حسينية الشعباوي', // اسم التطبيق / القناة
+                    album: item.reciter ? `الرادود: ${item.reciter}` : '', 
                     artwork: [
                         { src: thumbSrc, sizes: '96x96', type: 'image/jpeg' },
                         { src: thumbSrc, sizes: '128x128', type: 'image/jpeg' },
                         { src: thumbSrc, sizes: '192x192', type: 'image/jpeg' },
                         { src: thumbSrc, sizes: '256x256', type: 'image/jpeg' },
                         { src: thumbSrc, sizes: '384x384', type: 'image/jpeg' },
-                        { src: thumbSrc, sizes: '512x512', type: 'image/jpeg' }
+                        { src: thumbSrc, sizes: '512x512', type: 'image/jpeg' } // لضمان الجودة العالية في شاشة القفل
                     ]
                 });
             }
         }
 
-        // الدالة المحدثة الخاصة بأزرار التحكم في إشعار الميديا
         function setupMediaSessionHandlers() {
             if ('mediaSession' in navigator) {
                 const audioPlayer = document.getElementById('globalAudioPlayer');
                 navigator.mediaSession.setActionHandler('play', () => audioPlayer.play());
                 navigator.mediaSession.setActionHandler('pause', () => audioPlayer.pause());
-                navigator.mediaSession.setActionHandler('seekbackward', () => {
-                    audioPlayer.currentTime = Math.max(audioPlayer.currentTime - 10, 0);
-                });
-                navigator.mediaSession.setActionHandler('seekforward', () => {
-                    audioPlayer.currentTime = Math.min(audioPlayer.currentTime + 10, audioPlayer.duration || 0);
-                });
+                navigator.mediaSession.setActionHandler('seekbackward', () => { audioPlayer.currentTime = Math.max(audioPlayer.currentTime - 10, 0); });
+                navigator.mediaSession.setActionHandler('seekforward', () => { audioPlayer.currentTime = Math.min(audioPlayer.currentTime + 10, audioPlayer.duration || 0); });
             }
         }
 
@@ -797,40 +851,31 @@
             if (type === 'date') {
                 titleElem.innerText = 'منقي الأشهر والسنوات الهجرية';
                 const defaultMonths = ["شهر محرم", "شهر صفر", "شهر ربيع الأول", "شهر ربيع الآخر", "شهر جمادى الأولى", "شهر جمادى الآخرة", "شهر رجب", "شهر شعبان", "شهر رمضان", "شهر شوال", "شهر ذو القعدة", "شهر ذو الحجة"];
-                
                 let monthSec = document.createElement('div'); monthSec.className = 'filter-section-title'; monthSec.innerText = '🌙 اختر الشهر الهجري:'; optionsList.appendChild(monthSec);
                 defaultMonths.forEach(m => {
                     const isChecked = selectedFilters.months.includes(m);
                     optionsList.innerHTML += `<label class="filter-option-item"><span>${m}</span><input type="checkbox" class="month-cb" value="${m}" ${isChecked ? 'checked' : ''}></label>`;
                 });
-
                 let yearSec = document.createElement('div'); yearSec.className = 'filter-section-title'; yearSec.innerText = '📅 اختر السنة الهجرية:'; optionsList.appendChild(yearSec);
-                if (customYearsList.length === 0) {
-                    optionsList.innerHTML += `<p style="color:#777; font-size:13px; padding:5px 0;">لم تقم بإضافة أي سنة هجرية بعد.</p>`;
-                } else {
-                    customYearsList.forEach(y => {
-                        const isChecked = selectedFilters.years.includes(y);
-                        optionsList.innerHTML += `<label class="filter-option-item"><span>${y}</span><input type="checkbox" class="year-cb" value="${y}" ${isChecked ? 'checked' : ''}></label>`;
-                    });
-                }
+                if (customYearsList.length === 0) optionsList.innerHTML += `<p style="color:#777; font-size:13px; padding:5px 0;">لم تقم بإضافة أي سنة هجرية بعد.</p>`;
+                else customYearsList.forEach(y => {
+                    const isChecked = selectedFilters.years.includes(y);
+                    optionsList.innerHTML += `<label class="filter-option-item"><span>${y}</span><input type="checkbox" class="year-cb" value="${y}" ${isChecked ? 'checked' : ''}></label>`;
+                });
             } else if (type === 'type') {
                 titleElem.innerText = 'منقي التصنيف والأنواع';
                 if (customTypesList.length === 0) optionsList.innerHTML = '<p style="color:#777; font-size:13px; text-align:center; padding:15px 0;">لم تقم بإضافة أي تصنيف بعد.</p>';
-                else {
-                    customTypesList.forEach(val => {
-                        const isChecked = selectedFilters.types.includes(val);
-                        optionsList.innerHTML += `<label class="filter-option-item"><span>${val}</span><input type="checkbox" class="type-cb" value="${val}" ${isChecked ? 'checked' : ''}></label>`;
-                    });
-                }
+                else customTypesList.forEach(val => {
+                    const isChecked = selectedFilters.types.includes(val);
+                    optionsList.innerHTML += `<label class="filter-option-item"><span>${val}</span><input type="checkbox" class="type-cb" value="${val}" ${isChecked ? 'checked' : ''}></label>`;
+                });
             } else if (type === 'reciter') {
                 titleElem.innerText = 'منقي القراء والرواديد';
                 if (customRecitersList.length === 0) optionsList.innerHTML = '<p style="color:#777; font-size:13px; text-align:center; padding:15px 0;">لم تقم بإضافة أي رادود بعد.</p>';
-                else {
-                    customRecitersList.forEach(val => {
-                        const isChecked = selectedFilters.reciters.includes(val);
-                        optionsList.innerHTML += `<label class="filter-option-item"><span>${val}</span><input type="checkbox" class="reciter-cb" value="${val}" ${isChecked ? 'checked' : ''}></label>`;
-                    });
-                }
+                else customRecitersList.forEach(val => {
+                    const isChecked = selectedFilters.reciters.includes(val);
+                    optionsList.innerHTML += `<label class="filter-option-item"><span>${val}</span><input type="checkbox" class="reciter-cb" value="${val}" ${isChecked ? 'checked' : ''}></label>`;
+                });
             }
             overlay.style.display = 'flex';
         }
@@ -902,7 +947,6 @@
 
         function closeAdmin() { resetAdminForm(); document.getElementById('adminModal').style.display = 'none'; }
 
-        // --- دوال فك الحظر في لوحة التحكم ---
         function renderBannedList() {
             const container = document.getElementById('bannedListContainer');
             container.innerHTML = '';
@@ -913,13 +957,7 @@
             bannedDevicesList.forEach(device => {
                 const div = document.createElement('div');
                 div.className = 'manage-item';
-                div.innerHTML = `
-                    <div style="display:flex; flex-direction:column; gap:4px;">
-                        <span style="color:#ff5252; font-weight:bold;">${device.name}</span>
-                        <span style="font-size:11px; color:#aaa;">التاريخ: ${device.date}</span>
-                    </div>
-                    <button class="btn-warning" onclick="unbanDevice('${device.id}')">إلغاء حظر 🔓</button>
-                `;
+                div.innerHTML = `<div style="display:flex; flex-direction:column; gap:4px;"><span style="color:#ff5252; font-weight:bold;">${device.name}</span><span style="font-size:11px; color:#aaa;">التاريخ: ${device.date}</span></div><button class="btn-warning" onclick="unbanDevice('${device.id}')">إلغاء حظر 🔓</button>`;
                 container.appendChild(div);
             });
         }
@@ -927,18 +965,11 @@
         function unbanDevice(id) {
             if (confirm("هل أنت متأكد من إلغاء حظر هذا الجهاز؟")) {
                 const pass = prompt("الرجاء إدخال كلمة سر فك الحظر:");
-                // الكلمة مشفرة لحمايتها
                 const _0xUnban = ['T','h','e',' ','l','i','f','t','i','n','g',' ','o','f',' ','t','h','e',' ','b','a','n',' ','w','a','s',' ','o','f','f','i','c','i','a','l','l','y',' ','a','n','n','o','u','n','c','e','d',' ','b','y',' ','M','o','h','a','m','m','e','d',' ','H','a','s','s','a','n',' ','A','b','d','u','l',' ','A','m','i','r',' ','K','h','u','d','a','i','r',' ','J','a','s','s','i','m',' ','A','l',' ','S','a','l','e','m',')','(',')','(',')','(','/','#',')','»','»','♡','»','»','»','»','»','»','»','»','«','«','«','«','«','«','«','«','«','«','♡','♡','♡','♡','♡','♡','«','«','~','»'];
-                
                 if (pass === _0xUnban.join('')) {
                     bannedDevicesList = bannedDevicesList.filter(d => d.id !== id);
-                    syncOnlineData(() => {
-                        alert("تم فك الحظر عن الجهاز بنجاح! يمكنه الدخول الآن.");
-                        renderBannedList();
-                    });
-                } else {
-                    alert("كلمة سر فك الحظر خاطئة!");
-                }
+                    syncOnlineData(() => { alert("تم فك الحظر عن الجهاز بنجاح! يمكنه الدخول الآن."); renderBannedList(); });
+                } else alert("كلمة سر فك الحظر خاطئة!");
             }
         }
 
@@ -948,12 +979,14 @@
             document.getElementById('navReorderBtn').className = (tab === 'reorder') ? 'active' : '';
             document.getElementById('navDeleteBtn').className = (tab === 'delete') ? 'active' : '';
             document.getElementById('navBannedBtn').className = (tab === 'banned') ? 'active' : '';
+            document.getElementById('navNotifyBtn').className = (tab === 'notify') ? 'active' : '';
 
             document.getElementById('addEditSection').style.display = (tab === 'add') ? 'block' : 'none';
             document.getElementById('editSection').style.display = (tab === 'edit') ? 'block' : 'none';
             document.getElementById('reorderSection').style.display = (tab === 'reorder') ? 'block' : 'none';
             document.getElementById('deleteSection').style.display = (tab === 'delete') ? 'block' : 'none';
             document.getElementById('bannedSection').style.display = (tab === 'banned') ? 'block' : 'none';
+            document.getElementById('notifySection').style.display = (tab === 'notify') ? 'block' : 'none';
 
             if (tab === 'add') toggleAdminFormFields();
             if (tab === 'edit') filterManageList('edit');
@@ -973,21 +1006,11 @@
             else if (cat === 'reciters') tempReorderArray = [...customRecitersList];
             else if (cat === 'years') tempReorderArray = [...customYearsList];
 
-            if (tempReorderArray.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#777; padding:10px;">لا يوجد عناصر للترتيب.</p>';
-                return;
-            }
+            if (tempReorderArray.length === 0) { container.innerHTML = '<p style="text-align:center; color:#777; padding:10px;">لا يوجد عناصر للترتيب.</p>'; return; }
             tempReorderArray.forEach((item, index) => {
                 const title = typeof item === 'string' ? item : item.title;
-                const div = document.createElement('div');
-                div.className = 'manage-item';
-                div.innerHTML = `
-                    <span>${index + 1}. ${title}</span>
-                    <div class="reorder-btn-group">
-                        <button class="btn-arrow" onclick="moveReorderItem(${index}, -1)">▲ للأعلى</button>
-                        <button class="btn-arrow" onclick="moveReorderItem(${index}, 1)">▼ للأسفل</button>
-                    </div>
-                `;
+                const div = document.createElement('div'); div.className = 'manage-item';
+                div.innerHTML = `<span>${index + 1}. ${title}</span><div class="reorder-btn-group"><button class="btn-arrow" onclick="moveReorderItem(${index}, -1)">▲ للأعلى</button><button class="btn-arrow" onclick="moveReorderItem(${index}, 1)">▼ للأسفل</button></div>`;
                 container.appendChild(div);
             });
         }
@@ -1038,20 +1061,15 @@
                 const typeSel = document.getElementById('mediaTypeSelect').value;
                 type = (typeSel === '__NEW__') ? document.getElementById('customTypeInput').value.trim() : typeSel;
                 if (type && !customTypesList.includes(type)) customTypesList.push(type);
-
                 timeDay = document.getElementById('mediaTimeDay').value.trim();
                 month = document.getElementById('mediaHijriMonthSelect').value;
-
                 const yearSel = document.getElementById('mediaHijriYearSelect').value;
                 year = (yearSel === '__NEW__') ? document.getElementById('customYearInput').value.trim() : yearSel;
                 if (year && !customYearsList.includes(year)) customYearsList.push(year);
-
                 location = document.getElementById('mediaLocation').value.trim() || 'حسينية الشعباوي في البصرة';
-
                 const reciterSel = document.getElementById('mediaReciterSelect').value;
                 reciter = (reciterSel === '__NEW__') ? document.getElementById('customReciterInput').value.trim() : reciterSel;
                 if (reciter && !customRecitersList.includes(reciter)) customRecitersList.push(reciter);
-
                 fullDateText = buildFullDateText(timeDay, month, year);
             }
 
@@ -1077,30 +1095,19 @@
                 });
             }
 
-            syncOnlineData(() => {
-                resetAdminForm(); closeAdmin(); alert("تم النشر بنجاح! 🚀");
-            });
+            syncOnlineData(() => { resetAdminForm(); closeAdmin(); alert("تم النشر بنجاح! 🚀"); });
         }
 
         function resetAdminForm() {
-            document.getElementById('editingItemId').value = "";
-            document.getElementById('mediaCategory').value = "videos";
-            document.getElementById('customTypeGroup').style.display = "none";
-            document.getElementById('customReciterGroup').style.display = "none";
-            document.getElementById('customYearGroup').style.display = "none";
-            document.getElementById('mediaTimeDay').value = "";
-            document.getElementById('mediaTitle').value = "";
-            document.getElementById('mediaLocation').value = "";
-            document.getElementById('customTypeInput').value = "";
-            document.getElementById('customReciterInput').value = "";
-            document.getElementById('customYearInput').value = "";
-            document.getElementById('thumbUrl').value = "";
-            document.getElementById('videoUrl').value = "";
-            document.getElementById('audioUrl').value = "";
-            document.getElementById('mediaPlaylistId').value = "";
-            document.getElementById('formTitle').innerText = "إضافة محتوى جديد";
-            document.getElementById('saveBtn').innerText = "نشر أونلاين فوراً ⚡";
-            document.getElementById('cancelEditBtn').style.display = "none";
+            document.getElementById('editingItemId').value = ""; document.getElementById('mediaCategory').value = "videos";
+            document.getElementById('customTypeGroup').style.display = "none"; document.getElementById('customReciterGroup').style.display = "none";
+            document.getElementById('customYearGroup').style.display = "none"; document.getElementById('mediaTimeDay').value = "";
+            document.getElementById('mediaTitle').value = ""; document.getElementById('mediaLocation').value = "";
+            document.getElementById('customTypeInput').value = ""; document.getElementById('customReciterInput').value = "";
+            document.getElementById('customYearInput').value = ""; document.getElementById('thumbUrl').value = "";
+            document.getElementById('videoUrl').value = ""; document.getElementById('audioUrl').value = "";
+            document.getElementById('mediaPlaylistId').value = ""; document.getElementById('formTitle').innerText = "إضافة محتوى جديد";
+            document.getElementById('saveBtn').innerText = "نشر أونلاين فوراً ⚡"; document.getElementById('cancelEditBtn').style.display = "none";
             toggleAdminFormFields();
         }
 
@@ -1112,16 +1119,13 @@
 
             if (currentCategory === 'playlists' && activePlaylistId) {
                 const pl = cachedMediaItems.find(i => i.id === activePlaylistId);
-                const backBtn = document.createElement('div');
-                backBtn.className = 'playlist-header-back';
+                const backBtn = document.createElement('div'); backBtn.className = 'playlist-header-back';
                 backBtn.innerHTML = `<span>❯ العودة لقوائم التشغيل</span> <span style="margin-right:auto; color:#a3c2a8;">${pl ? pl.title : ''}</span>`;
-                backBtn.onclick = () => { activePlaylistId = null; loadMedia(); };
-                container.appendChild(backBtn);
+                backBtn.onclick = () => { activePlaylistId = null; loadMedia(); }; container.appendChild(backBtn);
 
                 let items = cachedMediaItems.filter(item => item.playlistId === activePlaylistId);
                 if (items.length === 0) { container.innerHTML += '<p style="text-align: center; color: #888; margin-top: 30px;">لا توجد فيديوهات في هذه القائمة.</p>'; return; }
-                items.forEach(item => renderCard(item, container));
-                return;
+                items.forEach(item => renderCard(item, container)); return;
             }
 
             let items = [];
@@ -1137,21 +1141,15 @@
                     return matchesMonth && matchesYear && matchesType && matchesReciter;
                 });
             }
-
             if (searchQuery) items = items.filter(i => i.title.toLowerCase().includes(searchQuery.toLowerCase()) || (i.reciter && i.reciter.toLowerCase().includes(searchQuery.toLowerCase())));
-
             if (items.length === 0) { container.innerHTML = '<p style="text-align: center; color: #888; margin-top: 30px;">لا يوجد محتوى يطابق الفلتر أو البحث الحالي.</p>'; return; }
             items.forEach(item => renderCard(item, container));
         }
 
         function renderCard(item, container) {
-            const card = document.createElement('div');
-            card.className = 'custom-card';
-
+            const card = document.createElement('div'); card.className = 'custom-card';
             const ytId = getYoutubeId(item.videoUrl);
-            let thumbSrc = item.thumbUrl;
-            if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-            if (!thumbSrc) thumbSrc = 'https://via.placeholder.com/150x150/1a1a1a/ffffff?text=شعار';
+            let thumbSrc = item.thumbUrl || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 'https://via.placeholder.com/150x150/1a1a1a/ffffff?text=شعار');
 
             if (item.category === 'playlists') {
                 const count = cachedMediaItems.filter(i => i.playlistId === item.id).length;
@@ -1175,10 +1173,7 @@
             updateMediaSession(item, thumbSrc); audioPlayer.play();
         }
 
-        function closeAudioPlayer() {
-            document.getElementById('globalAudioPlayer').pause();
-            document.getElementById('stickyAudioPlayer').style.display = 'none';
-        }
+        function closeAudioPlayer() { document.getElementById('globalAudioPlayer').pause(); document.getElementById('stickyAudioPlayer').style.display = 'none'; }
 
         function playVideo(item) {
             if (!item.videoUrl) return;
@@ -1192,19 +1187,8 @@
             document.getElementById('playerModal').style.display = 'flex';
         }
 
-        function closePlayer() {
-            document.getElementById('mainVideo').pause();
-            document.getElementById('mainVideo').src = '';
-            document.getElementById('youtubeIframe').src = '';
-            document.getElementById('playerModal').style.display = 'none';
-        }
-
-        function toggleFullscreen() {
-            const videoElem = document.getElementById('mainVideo');
-            const iframeElem = document.getElementById('youtubeIframe');
-            const target = videoElem.style.display !== 'none' ? videoElem : iframeElem;
-            if (target.requestFullscreen) target.requestFullscreen();
-        }
+        function closePlayer() { document.getElementById('mainVideo').pause(); document.getElementById('mainVideo').src = ''; document.getElementById('youtubeIframe').src = ''; document.getElementById('playerModal').style.display = 'none'; }
+        function toggleFullscreen() { const videoElem = document.getElementById('mainVideo'); const iframeElem = document.getElementById('youtubeIframe'); const target = videoElem.style.display !== 'none' ? videoElem : iframeElem; if (target.requestFullscreen) target.requestFullscreen(); }
 
         function filterManageList(type) {
             const isEdit = type === 'edit';
@@ -1219,27 +1203,22 @@
                 });
             } else {
                 const deleteCat = document.getElementById('deleteCategorySelect').value;
-                if (deleteCat === 'items') {
-                    cachedMediaItems.filter(i => i.title.toLowerCase().includes(query)).forEach(item => {
-                        const div = document.createElement('div'); div.className = 'manage-item';
-                        div.innerHTML = `<span>[${item.category}] ${item.title}</span><button class="btn-danger" onclick="deleteItem(${item.id}, 'items')">حذف 🗑️</button>`; container.appendChild(div);
-                    });
-                } else if (deleteCat === 'types') {
-                    customTypesList.filter(t => t.toLowerCase().includes(query)).forEach(typeItem => {
-                        const div = document.createElement('div'); div.className = 'manage-item';
-                        div.innerHTML = `<span>${typeItem}</span><button class="btn-danger" onclick="deleteItem('${typeItem}', 'types')">حذف 🗑️</button>`; container.appendChild(div);
-                    });
-                } else if (deleteCat === 'reciters') {
-                    customRecitersList.filter(r => r.toLowerCase().includes(query)).forEach(reciterItem => {
-                        const div = document.createElement('div'); div.className = 'manage-item';
-                        div.innerHTML = `<span>${reciterItem}</span><button class="btn-danger" onclick="deleteItem('${reciterItem}', 'reciters')">حذف 🗑️</button>`; container.appendChild(div);
-                    });
-                } else if (deleteCat === 'years') {
-                    customYearsList.filter(y => y.toLowerCase().includes(query)).forEach(yearItem => {
-                        const div = document.createElement('div'); div.className = 'manage-item';
-                        div.innerHTML = `<span>${yearItem}</span><button class="btn-danger" onclick="deleteItem('${yearItem}', 'years')">حذف 🗑️</button>`; container.appendChild(div);
-                    });
-                }
+                if (deleteCat === 'items') cachedMediaItems.filter(i => i.title.toLowerCase().includes(query)).forEach(item => {
+                    const div = document.createElement('div'); div.className = 'manage-item';
+                    div.innerHTML = `<span>[${item.category}] ${item.title}</span><button class="btn-danger" onclick="deleteItem(${item.id}, 'items')">حذف 🗑️</button>`; container.appendChild(div);
+                });
+                else if (deleteCat === 'types') customTypesList.filter(t => t.toLowerCase().includes(query)).forEach(typeItem => {
+                    const div = document.createElement('div'); div.className = 'manage-item';
+                    div.innerHTML = `<span>${typeItem}</span><button class="btn-danger" onclick="deleteItem('${typeItem}', 'types')">حذف 🗑️</button>`; container.appendChild(div);
+                });
+                else if (deleteCat === 'reciters') customRecitersList.filter(r => r.toLowerCase().includes(query)).forEach(reciterItem => {
+                    const div = document.createElement('div'); div.className = 'manage-item';
+                    div.innerHTML = `<span>${reciterItem}</span><button class="btn-danger" onclick="deleteItem('${reciterItem}', 'reciters')">حذف 🗑️</button>`; container.appendChild(div);
+                });
+                else if (deleteCat === 'years') customYearsList.filter(y => y.toLowerCase().includes(query)).forEach(yearItem => {
+                    const div = document.createElement('div'); div.className = 'manage-item';
+                    div.innerHTML = `<span>${yearItem}</span><button class="btn-danger" onclick="deleteItem('${yearItem}', 'years')">حذف 🗑️</button>`; container.appendChild(div);
+                });
             }
         }
 
@@ -1251,26 +1230,14 @@
             if (item.year && item.year.trim() && !customYearsList.includes(item.year.trim())) customYearsList.push(item.year.trim());
             if (item.reciter && item.reciter.trim() && !customRecitersList.includes(item.reciter.trim())) customRecitersList.push(item.reciter.trim());
 
-            document.getElementById('editingItemId').value = item.id;
-            document.getElementById('mediaCategory').value = item.category || "videos";
-            toggleAdminFormFields();
-
-            document.getElementById('mediaTypeSelect').value = item.type || "";
-            document.getElementById('mediaTimeDay').value = item.timeDay || "";
-            document.getElementById('mediaHijriMonthSelect').value = item.month || "";
-            document.getElementById('mediaHijriYearSelect').value = item.year || "";
-            document.getElementById('mediaTitle').value = item.title;
-            document.getElementById('mediaLocation').value = item.location || "";
-            document.getElementById('mediaReciterSelect').value = item.reciter || "";
-            document.getElementById('thumbUrl').value = item.thumbUrl || "";
-            document.getElementById('videoUrl').value = item.videoUrl || "";
-            document.getElementById('audioUrl').value = item.audioUrl || "";
-            document.getElementById('mediaPlaylistId').value = item.playlistId || "";
+            document.getElementById('editingItemId').value = item.id; document.getElementById('mediaCategory').value = item.category || "videos"; toggleAdminFormFields();
+            document.getElementById('mediaTypeSelect').value = item.type || ""; document.getElementById('mediaTimeDay').value = item.timeDay || "";
+            document.getElementById('mediaHijriMonthSelect').value = item.month || ""; document.getElementById('mediaHijriYearSelect').value = item.year || "";
+            document.getElementById('mediaTitle').value = item.title; document.getElementById('mediaLocation').value = item.location || "";
+            document.getElementById('mediaReciterSelect').value = item.reciter || ""; document.getElementById('thumbUrl').value = item.thumbUrl || "";
+            document.getElementById('videoUrl').value = item.videoUrl || ""; document.getElementById('audioUrl').value = item.audioUrl || ""; document.getElementById('mediaPlaylistId').value = item.playlistId || "";
             
-            document.getElementById('formTitle').innerText = "✏️ تعديل المحتوى";
-            document.getElementById('saveBtn').innerText = "حفظ التعديلات ⚡";
-            document.getElementById('cancelEditBtn').style.display = "block";
-            switchAdminTab('add');
+            document.getElementById('formTitle').innerText = "✏️ تعديل المحتوى"; document.getElementById('saveBtn').innerText = "حفظ التعديلات ⚡"; document.getElementById('cancelEditBtn').style.display = "block"; switchAdminTab('add');
         }
 
         function deleteItem(target, targetType) {
@@ -1290,3 +1257,4 @@
     </script>
 </body>
 </html>
+
