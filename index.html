@@ -338,7 +338,7 @@
 
         <div class="sticky-audio-player" id="stickyAudioPlayer">
             <div class="audio-info" id="audioTitleDisplay">جاري التشغيل...</div>
-            <audio id="globalAudioPlayer" controls controlsList="nodownload" style="height: 35px; outline: none;"></audio>
+            <audio id="globalAudioPlayer" controls controlsList="nodownload" playsinline preload="metadata" style="height: 35px; outline: none;"></audio>
             <button onclick="closeAudioPlayer()" style="background:none; border:none; color:white; font-size:16px; cursor:pointer;">✖</button>
         </div>
 
@@ -595,6 +595,10 @@
             
             if (inputVal === _0xkey.join('')) {
                 localStorage.setItem('failed_attempts', '0'); // تصفير المحاولات عند النجاح
+                
+                // حفظ حالة تسجيل الدخول ليتم تخطيها في المرات القادمة
+                localStorage.setItem('is_logged_in', 'true'); 
+                
                 const loginScreen = document.getElementById('login-screen');
                 loginScreen.style.opacity = '0';
                 setTimeout(() => {
@@ -677,7 +681,13 @@
             .catch(err => alert("حدث خطأ أثناء حفظ البيانات بالسيرفر!"));
         }
 
-        window.onload = function() { 
+        window.onload = function() {
+            // تخطي صفحة تسجيل الدخول إذا كان المستخدم قد سجل الدخول سابقاً بنجاح
+            if (localStorage.getItem('is_logged_in') === 'true') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-app-content').style.display = 'block';
+            }
+
             fetchOnlineData(); 
             setupMediaSessionHandlers();
         };
@@ -743,20 +753,37 @@
 
         function closeDetailsModal() { document.getElementById('detailsModalOverlay').style.display = 'none'; }
 
+        // الدالة المحدثة الخاصة ببيانات إشعار الميديا
         function updateMediaSession(item, thumbSrc) {
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
-                    title: item.title, artist: item.reciter || 'حسينية الشعباوي',
-                    album: item.location || 'تطبيق حسينية الشعباوي', artwork: [{ src: thumbSrc, sizes: '512x512', type: 'image/png' }]
+                    title: item.title,
+                    artist: 'حسينية الشعباوي',
+                    album: item.reciter ? `الرادود: ${item.reciter}` : 'تطبيق حسينية الشعباوي',
+                    artwork: [
+                        { src: thumbSrc, sizes: '96x96', type: 'image/jpeg' },
+                        { src: thumbSrc, sizes: '128x128', type: 'image/jpeg' },
+                        { src: thumbSrc, sizes: '192x192', type: 'image/jpeg' },
+                        { src: thumbSrc, sizes: '256x256', type: 'image/jpeg' },
+                        { src: thumbSrc, sizes: '384x384', type: 'image/jpeg' },
+                        { src: thumbSrc, sizes: '512x512', type: 'image/jpeg' }
+                    ]
                 });
             }
         }
 
+        // الدالة المحدثة الخاصة بأزرار التحكم في إشعار الميديا
         function setupMediaSessionHandlers() {
             if ('mediaSession' in navigator) {
                 const audioPlayer = document.getElementById('globalAudioPlayer');
                 navigator.mediaSession.setActionHandler('play', () => audioPlayer.play());
                 navigator.mediaSession.setActionHandler('pause', () => audioPlayer.pause());
+                navigator.mediaSession.setActionHandler('seekbackward', () => {
+                    audioPlayer.currentTime = Math.max(audioPlayer.currentTime - 10, 0);
+                });
+                navigator.mediaSession.setActionHandler('seekforward', () => {
+                    audioPlayer.currentTime = Math.min(audioPlayer.currentTime + 10, audioPlayer.duration || 0);
+                });
             }
         }
 
