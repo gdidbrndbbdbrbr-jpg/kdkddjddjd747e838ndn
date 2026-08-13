@@ -1,4 +1,4 @@
-Enter<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -236,7 +236,7 @@ Enter<!DOCTYPE html>
         }
         .audio-info { font-size: 13px; color: #ffffff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 65%; }
 
-        /* لوحة التحكم kokoko */
+        /* لوحة التحكم */
         .admin-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.88); z-index: 1500; justify-content: center; align-items: center; padding: 10px;
@@ -269,6 +269,52 @@ Enter<!DOCTYPE html>
         .reorder-btn-group { display: flex; gap: 4px; }
         .btn-arrow { background: #333; color: white; border: 1px solid #555; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         .btn-arrow:hover { background: #555; }
+
+        /* نافذة المشغل الصوتي الكامل (الجديدة) */
+        .full-audio-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 4000; justify-content: center; align-items: flex-end;
+        }
+        .full-audio-card {
+            background: #ffffff; color: #000000; width: 100%; height: 95vh;
+            border-top-left-radius: 25px; border-top-right-radius: 25px;
+            padding: 20px; display: flex; flex-direction: column; align-items: center;
+            animation: slideUpAudio 0.3s ease-out; position: relative; overflow-y: auto;
+        }
+        @keyframes slideUpAudio { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        .close-audio-btn {
+            position: absolute; top: 15px; left: 15px; background: none; border: none;
+            font-size: 24px; color: #333; cursor: pointer; font-weight: bold;
+        }
+        .full-audio-img {
+            width: 220px; height: 220px; border-radius: 20px; object-fit: cover;
+            margin-top: 30px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .full-audio-title {
+            font-size: 18px; font-weight: bold; text-align: center; margin-bottom: 8px; line-height: 1.4; color: #111;
+        }
+        .full-audio-subtitle {
+            font-size: 13px; color: #555; text-align: center; margin-bottom: 4px;
+        }
+        .progress-container {
+            width: 100%; display: flex; align-items: center; gap: 10px; margin-top: 30px; margin-bottom: 20px; padding: 0 10px;
+        }
+        .progress-container span { font-size: 12px; color: #555; font-weight: bold; width: 40px; text-align: center; }
+        .progress-container input[type="range"] {
+            flex: 1; accent-color: #1b4329; height: 5px; border-radius: 3px; outline: none;
+        }
+        .audio-main-controls {
+            display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; margin-top: 10px;
+        }
+        .audio-ctrl-btn {
+            background: #1b4329; color: white; border: none; width: 50px; height: 50px;
+            border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(27,67,41,0.4);
+        }
+        .audio-ctrl-btn.play-btn {
+            width: 70px; height: 70px; font-size: 30px; background: #143520;
+        }
     </style>
 </head>
 <body>
@@ -277,7 +323,6 @@ Enter<!DOCTYPE html>
         <div class="header-right">
             <a href="#" class="back-btn" onclick="location.reload();">❯</a>
             
-            <!-- قسم المناسبات في الهيدر العلوي -->
             <div id="eventBannerContainer" class="event-banner-container" onclick="handleEventBannerClick()">
                 <div id="eventBannerContent" class="event-content-display"></div>
             </div>
@@ -336,10 +381,36 @@ Enter<!DOCTYPE html>
         </div>
     </div>
 
+    <!-- الشريط السفلي المصغر (معدل لجعله قابل للنقر) -->
     <div class="sticky-audio-player" id="stickyAudioPlayer">
-        <div class="audio-info" id="audioTitleDisplay">جاري التشغيل...</div>
-        <audio id="globalAudioPlayer" controls controlsList="nodownload" preload="none" style="height: 35px; outline: none;"></audio>
-        <button onclick="closeAudioPlayer()" style="background:none; border:none; color:white; font-size:16px; cursor:pointer;">✖</button>
+        <div class="audio-info" id="audioTitleDisplay" style="cursor:pointer; flex:1;" onclick="openFullAudioPlayer()">جاري التشغيل...</div>
+        <audio id="globalAudioPlayer" controls controlsList="nodownload" preload="none" style="height: 35px; outline: none; width: 120px;"></audio>
+        <button onclick="closeAudioPlayer()" style="background:none; border:none; color:white; font-size:16px; cursor:pointer; margin-right:10px;">✖</button>
+    </div>
+
+    <!-- النافذة الجديدة للمشغل الصوتي الكامل -->
+    <div class="full-audio-overlay" id="fullAudioOverlay">
+        <div class="full-audio-card">
+            <button class="close-audio-btn" onclick="closeFullAudioPlayer()">⏷</button>
+            <img id="fullAudioImg" class="full-audio-img" src="" alt="Cover">
+            <div id="fullAudioTitle" class="full-audio-title">العنوان</div>
+            <div id="fullAudioDate" class="full-audio-subtitle">التاريخ</div>
+            <div id="fullAudioReciter" class="full-audio-subtitle">القارئ</div>
+            
+            <div class="progress-container">
+                <span id="audioCurrentTime">00:00</span>
+                <input type="range" id="audioProgressBar" value="0" step="1" min="0" oninput="seekAudio()">
+                <span id="audioDuration">00:00</span>
+            </div>
+
+            <div class="audio-main-controls">
+                <button class="audio-ctrl-btn" onclick="skipAudio(-10)">↺</button>
+                <button class="audio-ctrl-btn" onclick="prevNextAudio('prev')">⏮</button>
+                <button class="audio-ctrl-btn play-btn" id="fullPlayPauseBtn" onclick="toggleFullPlayPause()">▶</button>
+                <button class="audio-ctrl-btn" onclick="prevNextAudio('next')">⏭</button>
+                <button class="audio-ctrl-btn" onclick="skipAudio(10)">↻</button>
+            </div>
+        </div>
     </div>
 
     <div class="curved-nav-wrapper">
@@ -526,7 +597,6 @@ Enter<!DOCTYPE html>
                 <div class="manage-list" id="deleteListContainer"></div>
             </div>
 
-            <!-- قسم المناسبات الجديد في لوحة التحكم -->
             <div id="eventSection" style="display: none;">
                 <h3 style="margin-top:0; color:#fbc02d;">إدارة شريط المناسبات (الأعلى)</h3>
                 
@@ -584,13 +654,11 @@ Enter<!DOCTYPE html>
         let currentActiveFilterType = null;
 
         function fetchOnlineData(callback) {
-            // 1. عرض البيانات المخزنة محلياً فوراً (لتسريع التحميل لأصحاب النت الضعيف)
             const localData = localStorage.getItem('hussainiyaData');
             if (localData) {
                 parseAndRenderData(JSON.parse(localData));
             }
 
-            // 2. جلب البيانات المحدثة من السيرفر في الخلفية
             fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
                 headers: { 'X-Master-Key': JSONBIN_API_KEY }
             })
@@ -1299,6 +1367,58 @@ Enter<!DOCTYPE html>
             container.appendChild(card);
         }
 
+        // الأكواد الجديدة للتحكم بالصوتيات 
+        const audioPlayerElem = document.getElementById('globalAudioPlayer');
+        const progressBar = document.getElementById('audioProgressBar');
+        const currentTimeElem = document.getElementById('audioCurrentTime');
+        const durationElem = document.getElementById('audioDuration');
+        const fullPlayBtn = document.getElementById('fullPlayPauseBtn');
+
+        audioPlayerElem.addEventListener('timeupdate', () => {
+            if (audioPlayerElem.duration) {
+                progressBar.max = audioPlayerElem.duration;
+                progressBar.value = audioPlayerElem.currentTime;
+                currentTimeElem.innerText = formatTime(audioPlayerElem.currentTime);
+                durationElem.innerText = formatTime(audioPlayerElem.duration);
+            }
+        });
+
+        audioPlayerElem.addEventListener('play', () => fullPlayBtn.innerText = '⏸');
+        audioPlayerElem.addEventListener('pause', () => fullPlayBtn.innerText = '▶');
+
+        function formatTime(seconds) {
+            let min = Math.floor(seconds / 60);
+            let sec = Math.floor(seconds % 60);
+            if (sec < 10) sec = '0' + sec;
+            return min + ':' + sec;
+        }
+
+        function seekAudio() {
+            audioPlayerElem.currentTime = progressBar.value;
+        }
+
+        function skipAudio(sec) {
+            audioPlayerElem.currentTime += sec;
+        }
+
+        function toggleFullPlayPause() {
+            if (audioPlayerElem.paused) audioPlayerElem.play();
+            else audioPlayerElem.pause();
+        }
+
+        function prevNextAudio(action) {
+            alert("سيتم برمجة الانتقال للمقطع التالي/السابق لاحقاً حسب القائمة");
+        }
+
+        function openFullAudioPlayer() {
+            document.getElementById('fullAudioOverlay').style.display = 'flex';
+        }
+
+        function closeFullAudioPlayer() {
+            document.getElementById('fullAudioOverlay').style.display = 'none';
+        }
+
+        // الدالة المعدلة لتشغيل الصوت ونقل بياناته للنافذة
         function playBackgroundAudio(item) {
             const stickyBar = document.getElementById('stickyAudioPlayer');
             const audioPlayer = document.getElementById('globalAudioPlayer');
@@ -1309,6 +1429,13 @@ Enter<!DOCTYPE html>
             if (!thumbSrc) thumbSrc = 'https://e.top4top.io/p_3874hbdrg1.jpg';
 
             document.getElementById('audioTitleDisplay').innerText = item.title;
+            
+            // تحديث بيانات النافذة الكاملة
+            document.getElementById('fullAudioImg').src = thumbSrc;
+            document.getElementById('fullAudioTitle').innerText = item.title;
+            document.getElementById('fullAudioDate').innerText = item.dateText || "";
+            document.getElementById('fullAudioReciter').innerText = item.reciter ? `القارئ: ${item.reciter}` : (item.location || "");
+
             audioPlayer.src = item.audioUrl || item.videoUrl;
             stickyBar.style.display = 'flex';
             
@@ -1489,4 +1616,4 @@ Enter<!DOCTYPE html>
         }
     </script>
 </body>
-</html>
+    </html>
