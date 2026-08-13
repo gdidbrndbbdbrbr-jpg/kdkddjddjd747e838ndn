@@ -22,35 +22,14 @@
         .back-btn { color: #2e7d32; font-size: 20px; cursor: pointer; text-decoration: none; font-weight: bold; }
         .app-logo { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; cursor: pointer; border: 1px solid #1b4329; min-width: 38px; }
 
-        /* تنسيقات قسم المناسبات في الهيدر */
         .event-banner-container {
-            flex: 1;
-            margin: 0 5px;
-            background: #1b4329;
-            border: 1px solid #2e7d32;
-            border-radius: 8px;
-            padding: 5px 10px;
-            text-align: center;
-            overflow: hidden;
-            cursor: pointer;
-            display: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            flex: 1; margin: 0 5px; background: #1b4329; border: 1px solid #2e7d32;
+            border-radius: 8px; padding: 5px 10px; text-align: center; overflow: hidden;
+            cursor: pointer; display: none; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
-        .event-content-display {
-            color: #fbc02d;
-            font-size: 13px;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .event-thumbnail {
-            max-height: 24px;
-            border-radius: 4px;
-            vertical-align: middle;
-        }
+        .event-content-display { color: #fbc02d; font-size: 13px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .event-thumbnail { max-height: 24px; border-radius: 4px; vertical-align: middle; }
 
-        /* نافذة عرض اللوجو */
         .logo-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center;
@@ -60,7 +39,6 @@
             border: 4px solid #1b4329; box-shadow: 0 0 25px rgba(46, 125, 50, 0.6);
         }
 
-        /* 2. شريط البحث */
         .search-container { padding: 12px 15px 5px 15px; background-color: #121212; }
         .search-input {
             width: 100%; padding: 10px 20px; background-color: #1e1e1e;
@@ -69,41 +47,19 @@
         }
         .search-input::placeholder { color: #777777; }
 
-        /* 3. شريط أزرار الفلترة */
-        .filter-bar {
-            display: flex; 
-            background-color: #1b4329; 
-            border-top: 1px solid #2e7d32; 
-            border-bottom: 1px solid #2e7d32;
-            margin-top: 10px; 
-            margin-bottom: 12px;
-        }
-        .filter-btn {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            gap: 8px; padding: 11px 5px; 
-            background: #1b4329; 
-            border: none;
-            border-left: 1px solid #2e7d32; 
-            color: #ffffff; 
-            font-size: 14px;
-            font-weight: bold; cursor: pointer; transition: background 0.2s;
-        }
+        .filter-bar { display: flex; background-color: #1b4329; border-top: 1px solid #2e7d32; border-bottom: 1px solid #2e7d32; margin-top: 10px; margin-bottom: 12px; }
+        .filter-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 5px; background: #1b4329; border: none; border-left: 1px solid #2e7d32; color: #ffffff; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
         .filter-btn:first-child { border-left: none; }
         .filter-btn:hover { background: #235635; }
 
-        /* 4. تصميم الكروت الداكن */
         .video-list { padding: 0 12px 20px 12px; display: flex; flex-direction: column; gap: 12px; }
-        
         .custom-card {
             background: #1a1a1a; color: #e0e0e0; border-radius: 12px; padding: 12px;
             display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid #2a2a2a;
-            cursor: pointer; transition: background 0.2s, transform 0.15s ease;
-            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid #2a2a2a; cursor: pointer; transition: background 0.2s, transform 0.15s ease; position: relative;
         }
         .custom-card:hover { background: #222222; }
         .custom-card:active { transform: scale(0.99); }
-
         .card-content-left { flex: 1; display: flex; flex-direction: column; gap: 5px; padding-left: 10px; }
         .card-header-row { display: flex; align-items: flex-start; gap: 8px; }
         .card-arrow { color: #888888; font-size: 14px; margin-top: 2px; }
@@ -113,151 +69,77 @@
         .card-play-btn { color: #81c784; font-size: 16px; }
         .card-location-text { font-size: 12px; color: #b0b0b0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .card-reciter-text { font-size: 12px; color: #9e9e9e; margin-top: 2px; }
-
         .card-actions-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
-        .btn-card-details {
-            background: #fbc02d; color: #000000; border: none;
-            padding: 5px 12px; border-radius: 6px; font-size: 11px;
-            font-weight: bold; cursor: pointer; transition: background 0.2s;
-        }
+        .btn-card-details { background: #fbc02d; color: #000000; border: none; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
         .btn-card-details:hover { background: #fdd835; }
-
-        .badge-card-type {
-            background: #d32f2f; color: #ffffff; border: none;
-            padding: 5px 10px; border-radius: 6px; font-size: 11px;
-            font-weight: bold; display: inline-block;
-        }
-
-        .card-thumb-right {
-            width: 90px; min-width: 90px; height: 90px;
-            border-radius: 8px; overflow: hidden; background: #000000; margin-right: 4px;
-        }
+        .badge-card-type { background: #d32f2f; color: #ffffff; border: none; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; display: inline-block; }
+        .card-thumb-right { width: 90px; min-width: 90px; height: 90px; border-radius: 8px; overflow: hidden; background: #000000; margin-right: 4px; }
         .card-thumb-right img { width: 100%; height: 100%; object-fit: cover; }
+        .playlist-header-back { display: flex; align-items: center; gap: 10px; background: #1b4329; padding: 10px 15px; border-radius: 8px; margin-bottom: 12px; cursor: pointer; font-weight: bold; }
 
-        .playlist-header-back {
-            display: flex; align-items: center; gap: 10px; background: #1b4329;
-            padding: 10px 15px; border-radius: 8px; margin-bottom: 12px; cursor: pointer; font-weight: bold;
-        }
-
-        /* نافذة عرض التفاصيل */
-        .details-modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 2800; justify-content: center; align-items: center;
-            padding: 15px;
-        }
-        .details-modal-card {
-            background: #1e1e1e; color: #ffffff; border-radius: 16px;
-            width: 100%; max-width: 450px; border: 1px solid #2e7d32;
-            padding: 20px; display: flex; flex-direction: column; gap: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative;
-        }
-        .details-modal-img {
-            width: 100%; height: 180px; border-radius: 10px; object-fit: cover; border: 1px solid #333;
-        }
+        .details-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2800; justify-content: center; align-items: center; padding: 15px; }
+        .details-modal-card { background: #1e1e1e; color: #ffffff; border-radius: 16px; width: 100%; max-width: 450px; border: 1px solid #2e7d32; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; }
+        .details-modal-img { width: 100%; height: 180px; border-radius: 10px; object-fit: cover; border: 1px solid #333; }
         .details-info-item { font-size: 14px; color: #ddd; line-height: 1.6; }
         .details-info-item strong { color: #81c784; }
-        .details-close-btn {
-            background: #2e7d32; color: white; border: none; padding: 12px;
-            border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; text-align: center;
-            font-size: 14px;
-        }
+        .details-close-btn { background: #2e7d32; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; text-align: center; font-size: 14px; }
 
-        /* 5. شريط التنقل السفلي */
-        .curved-nav-wrapper {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 70px;
-            background-color: #1b4329; z-index: 1000; display: flex;
-            justify-content: space-around; align-items: center;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
-            border-top-left-radius: 20px; border-top-right-radius: 20px;
-        }
-        .nav-item {
-            flex: 1; display: flex; flex-direction: column; align-items: center;
-            justify-content: center; color: #a3c2a8; cursor: pointer; transition: all 0.3s ease; height: 100%; text-decoration: none;
-        }
-        .nav-item .nav-icon {
-            width: 42px; height: 42px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 20px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .curved-nav-wrapper { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background-color: #1b4329; z-index: 1000; display: flex; justify-content: space-around; align-items: center; box-shadow: 0 -4px 15px rgba(0,0,0,0.5); border-top-left-radius: 20px; border-top-right-radius: 20px; }
+        .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #a3c2a8; cursor: pointer; transition: all 0.3s ease; height: 100%; text-decoration: none; }
+        .nav-item .nav-icon { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .nav-item .nav-text { font-size: 12px; font-weight: bold; margin-top: 2px; }
         .nav-item.active { color: #ffffff; }
-        .nav-item.active .nav-icon {
-            background-color: #ffffff; color: #1b4329; transform: translateY(-20px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4); border: 4px solid #1b4329; width: 50px; height: 50px; font-size: 24px;
-        }
+        .nav-item.active .nav-icon { background-color: #ffffff; color: #1b4329; transform: translateY(-20px); box-shadow: 0 6px 15px rgba(0,0,0,0.4); border: 4px solid #1b4329; width: 50px; height: 50px; font-size: 24px; }
         .nav-item.active .nav-text { transform: translateY(-8px); color: #ffffff; }
 
-        /* 6. نافذة منقي الفلاتر */
-        .filter-modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); z-index: 2500; justify-content: center; align-items: flex-end;
-        }
-        .filter-modal-card {
-            background: #ffffff; color: #000000;
-            width: 100%; max-width: 500px;
-            border-top-left-radius: 20px; border-top-right-radius: 20px;
-            padding: 20px 20px 25px 20px; max-height: 85vh;
-            display: flex; flex-direction: column;
-            animation: slideUp 0.3s ease-out;
-        }
+        .filter-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2500; justify-content: center; align-items: flex-end; }
+        .filter-modal-card { background: #ffffff; color: #000000; width: 100%; max-width: 500px; border-top-left-radius: 20px; border-top-right-radius: 20px; padding: 20px 20px 25px 20px; max-height: 85vh; display: flex; flex-direction: column; animation: slideUp 0.3s ease-out; }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .filter-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .filter-modal-title { font-size: 18px; font-weight: bold; color: #111; }
         .filter-modal-clear { color: #1b4329; font-weight: bold; cursor: pointer; font-size: 15px; }
-
         .filter-section-title { font-size: 14px; font-weight: bold; color: #1b4329; margin: 10px 0 5px 0; border-bottom: 1px solid #eee; padding-bottom: 4px; }
         .filter-options-list { overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; padding-right: 5px; margin-bottom: 15px; }
         .filter-option-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 15px; color: #222; cursor: pointer; }
         .filter-option-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: #1b4329; cursor: pointer; }
+        .filter-apply-btn { background: #1b4329; color: #ffffff; border: none; padding: 14px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; text-align: center; }
 
-        .filter-apply-btn {
-            background: #1b4329; color: #ffffff; border: none; padding: 14px;
-            border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; text-align: center;
-        }
+        .player-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
+        .player-header { position: absolute; top: 15px; right: 15px; left: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 2001; }
+        .btn-icon { background: rgba(255,255,255,0.2); color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-left: 5px; }
 
-        /* المشغلات */
-        .player-modal {
+        .sticky-audio-player { display: none; position: fixed; bottom: 72px; left: 10px; right: 10px; background: #1b4329; border-radius: 12px; padding: 10px 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: space-between; border: 1px solid #2e7d32; }
+        .audio-info { font-size: 13px; color: #ffffff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 65%; font-weight: bold; text-decoration: underline; }
+
+        /* نافذة مشغل الصوتيات الكامل (الجديدة) */
+        .expanded-audio-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 2000; flex-direction: column; justify-content: center; align-items: center;
+            background: #121212; z-index: 3500; flex-direction: column; align-items: center;
+            padding: 20px; overflow-y: auto;
         }
-        .player-header {
-            position: absolute; top: 15px; right: 15px; left: 15px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 2001;
-        }
-        .btn-icon {
-            background: rgba(255,255,255,0.2); color: white; border: none;
-            padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-left: 5px;
-        }
+        .expanded-header { width: 100%; display: flex; justify-content: flex-end; margin-bottom: 20px; }
+        .expanded-close-btn { background: none; border: none; color: white; font-size: 28px; cursor: pointer; font-weight: bold; }
+        .expanded-cover { width: 260px; height: 260px; border-radius: 15px; object-fit: cover; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(0,0,0,0.8); border: 2px solid #2e7d32; }
+        .expanded-title { font-size: 18px; font-weight: bold; text-align: center; color: #ffffff; margin-bottom: 10px; line-height: 1.4; }
+        .expanded-desc { font-size: 14px; text-align: center; color: #aaaaaa; margin-bottom: 30px; line-height: 1.6; }
+        .expanded-controls { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 10px; }
+        .progress-container { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #ddd; }
+        .audio-slider { width: 100%; margin: 0 10px; accent-color: #4caf50; cursor: pointer; }
+        .expanded-btns { display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 15px; }
+        .expanded-btn { background: none; border: none; color: white; font-size: 32px; cursor: pointer; transition: transform 0.2s; }
+        .expanded-btn:active { transform: scale(0.9); }
+        .play-pause-btn { font-size: 55px; color: #4caf50; }
 
-        .sticky-audio-player {
-            display: none; position: fixed; bottom: 72px; left: 10px; right: 10px;
-            background: #1b4329; border-radius: 12px; padding: 10px 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6); z-index: 999;
-            align-items: center; justify-content: space-between; border: 1px solid #2e7d32;
-        }
-        .audio-info { font-size: 13px; color: #ffffff; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 65%; }
-
-        /* لوحة التحكم */
-        .admin-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.88); z-index: 1500; justify-content: center; align-items: center; padding: 10px;
-        }
-        .admin-content {
-            background: #1e1e1e; color: white; padding: 20px; border-radius: 15px; width: 100%; max-width: 520px;
-            border: 1px solid #333; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column;
-        }
+        /* لوحة التحكم kokoko */
+        .admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 1500; justify-content: center; align-items: center; padding: 10px; }
+        .admin-content { background: #1e1e1e; color: white; padding: 20px; border-radius: 15px; width: 100%; max-width: 520px; border: 1px solid #333; max-height: 90vh; overflow-y: auto; display: flex; flex-direction: column; }
         .admin-nav { display: flex; gap: 4px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; flex-wrap: wrap; }
-        .admin-nav button {
-            flex: 1; padding: 8px 4px; background: #2a2a2a; border: 1px solid #444; color: #ccc;
-            border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 11px; white-space: nowrap;
-        }
+        .admin-nav button { flex: 1; padding: 8px 4px; background: #2a2a2a; border: 1px solid #444; color: #ccc; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 11px; white-space: nowrap; }
         .admin-nav button.active { background: #4caf50; color: black; border-color: #4caf50; }
         .admin-nav button#navEventBtn.active { background: #fbc02d; color: black; border-color: #fbc02d; }
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; margin-bottom: 5px; color: #ccc; font-size: 13px; }
-        .form-group input, .form-group select {
-            width: 100%; padding: 10px; background: #121212; border: 1px solid #444;
-            color: white; border-radius: 8px; outline: none; font-size: 14px;
-        }
+        .form-group input, .form-group select { width: 100%; padding: 10px; background: #121212; border: 1px solid #444; color: white; border-radius: 8px; outline: none; font-size: 14px; }
         .btn { background: #4caf50; color: black; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 8px; }
         .btn-danger { background: #d32f2f; color: white; }
         .btn-warning { background: #f57c00; color: white; }
@@ -265,56 +147,9 @@
         .manage-search { width: 100%; padding: 8px 12px; background: #121212; border: 1px solid #444; color: white; border-radius: 8px; margin-bottom: 10px; font-size: 13px; outline: none; }
         .manage-list { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
         .manage-item { display: flex; justify-content: space-between; align-items: center; background: #151515; padding: 10px; border-radius: 8px; font-size: 13px; border: 1px solid #2a2a2a; }
-        
         .reorder-btn-group { display: flex; gap: 4px; }
         .btn-arrow { background: #333; color: white; border: 1px solid #555; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         .btn-arrow:hover { background: #555; }
-
-        /* نافذة المشغل الصوتي الكامل (الجديدة) */
-        .full-audio-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 4000; justify-content: center; align-items: flex-end;
-        }
-        .full-audio-card {
-            background: #ffffff; color: #000000; width: 100%; height: 95vh;
-            border-top-left-radius: 25px; border-top-right-radius: 25px;
-            padding: 20px; display: flex; flex-direction: column; align-items: center;
-            animation: slideUpAudio 0.3s ease-out; position: relative; overflow-y: auto;
-        }
-        @keyframes slideUpAudio { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
-        .close-audio-btn {
-            position: absolute; top: 15px; left: 15px; background: none; border: none;
-            font-size: 24px; color: #333; cursor: pointer; font-weight: bold;
-        }
-        .full-audio-img {
-            width: 220px; height: 220px; border-radius: 20px; object-fit: cover;
-            margin-top: 30px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-        .full-audio-title {
-            font-size: 18px; font-weight: bold; text-align: center; margin-bottom: 8px; line-height: 1.4; color: #111;
-        }
-        .full-audio-subtitle {
-            font-size: 13px; color: #555; text-align: center; margin-bottom: 4px;
-        }
-        .progress-container {
-            width: 100%; display: flex; align-items: center; gap: 10px; margin-top: 30px; margin-bottom: 20px; padding: 0 10px;
-        }
-        .progress-container span { font-size: 12px; color: #555; font-weight: bold; width: 40px; text-align: center; }
-        .progress-container input[type="range"] {
-            flex: 1; accent-color: #1b4329; height: 5px; border-radius: 3px; outline: none;
-        }
-        .audio-main-controls {
-            display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; margin-top: 10px;
-        }
-        .audio-ctrl-btn {
-            background: #1b4329; color: white; border: none; width: 50px; height: 50px;
-            border-radius: 50%; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 10px rgba(27,67,41,0.4);
-        }
-        .audio-ctrl-btn.play-btn {
-            width: 70px; height: 70px; font-size: 30px; background: #143520;
-        }
     </style>
 </head>
 <body>
@@ -322,11 +157,9 @@
     <div class="app-header">
         <div class="header-right">
             <a href="#" class="back-btn" onclick="location.reload();">❯</a>
-            
             <div id="eventBannerContainer" class="event-banner-container" onclick="handleEventBannerClick()">
                 <div id="eventBannerContent" class="event-content-display"></div>
             </div>
-
             <img src="https://e.top4top.io/p_3874hbdrg1.jpg" class="app-logo" id="logoImg" alt="Logo" onclick="showLogoModal()">
         </div>
     </div>
@@ -340,15 +173,9 @@
     </div>
 
     <div class="filter-bar" id="mainFilterBar">
-        <button class="filter-btn" onclick="openFilterModal('date')">
-            <span>📅 التاريخ والأشهر</span>
-        </button>
-        <button class="filter-btn" onclick="openFilterModal('type')">
-            <span>≡ النوع</span>
-        </button>
-        <button class="filter-btn" onclick="openFilterModal('reciter')">
-            <span>🎙️ القراء</span>
-        </button>
+        <button class="filter-btn" onclick="openFilterModal('date')"><span>📅 التاريخ والأشهر</span></button>
+        <button class="filter-btn" onclick="openFilterModal('type')"><span>≡ النوع</span></button>
+        <button class="filter-btn" onclick="openFilterModal('reciter')"><span>🎙️ القراء</span></button>
     </div>
 
     <div class="video-list" id="videoContainer">
@@ -363,7 +190,6 @@
             <div class="details-info-item"><strong>المكان:</strong> <span id="detailsLocation"></span></div>
             <div class="details-info-item"><strong>القارئ:</strong> <span id="detailsReciter"></span></div>
             <div class="details-info-item"><strong>التصنيف:</strong> <span id="detailsType"></span></div>
-            
             <button class="details-close-btn" onclick="closeDetailsModal()">إغلاق النافذة</button>
         </div>
     </div>
@@ -374,69 +200,56 @@
                 <span class="filter-modal-title" id="filterModalTitle">منقي الفلتر</span>
                 <span class="filter-modal-clear" onclick="clearCurrentCategoryFilters()">مسح التحديد</span>
             </div>
-            
             <div class="filter-options-list" id="filterOptionsList"></div>
-
             <button class="filter-apply-btn" onclick="applySelectedFilters()">تطبيق الفلتر</button>
         </div>
     </div>
 
-    <!-- الشريط السفلي المصغر (معدل لجعله قابل للنقر) -->
+    <!-- شريط الصوت السفلي -->
     <div class="sticky-audio-player" id="stickyAudioPlayer">
-        <div class="audio-info" id="audioTitleDisplay" style="cursor:pointer; flex:1;" onclick="openFullAudioPlayer()">جاري التشغيل...</div>
-        <audio id="globalAudioPlayer" controls controlsList="nodownload" preload="none" style="height: 35px; outline: none; width: 120px;"></audio>
-        <button onclick="closeAudioPlayer()" style="background:none; border:none; color:white; font-size:16px; cursor:pointer; margin-right:10px;">✖</button>
+        <div class="audio-info" id="audioTitleDisplay" onclick="openExpandedAudioModal()" style="cursor: pointer;">جاري التشغيل...</div>
+        <audio id="globalAudioPlayer" preload="none" style="display:none;"></audio>
+        <div>
+            <button onclick="toggleGlobalAudioPlay()" id="stickyPlayBtn" style="background:none; border:none; color:white; font-size:24px; cursor:pointer; margin-left: 15px;">⏸</button>
+            <button onclick="closeAudioPlayer()" style="background:none; border:none; color:white; font-size:16px; cursor:pointer;">✖</button>
+        </div>
     </div>
 
-    <!-- النافذة الجديدة للمشغل الصوتي الكامل -->
-    <div class="full-audio-overlay" id="fullAudioOverlay">
-        <div class="full-audio-card">
-            <button class="close-audio-btn" onclick="closeFullAudioPlayer()">⏷</button>
-            <img id="fullAudioImg" class="full-audio-img" src="" alt="Cover">
-            <div id="fullAudioTitle" class="full-audio-title">العنوان</div>
-            <div id="fullAudioDate" class="full-audio-subtitle">التاريخ</div>
-            <div id="fullAudioReciter" class="full-audio-subtitle">القارئ</div>
-            
+    <!-- نافذة مشغل الصوتيات الشاملة والجديدة بدون أزرار حمراء -->
+    <div class="expanded-audio-modal" id="expandedAudioModal">
+        <div class="expanded-header">
+            <button class="expanded-close-btn" onclick="closeExpandedAudioModal()">✖</button>
+        </div>
+        <img id="expAudioCover" class="expanded-cover" src="" alt="Cover">
+        <h3 id="expAudioTitle" class="expanded-title"></h3>
+        <p id="expAudioDesc" class="expanded-desc"></p>
+        
+        <div class="expanded-controls">
             <div class="progress-container">
-                <span id="audioCurrentTime">00:00</span>
-                <input type="range" id="audioProgressBar" value="0" step="1" min="0" oninput="seekAudio()">
-                <span id="audioDuration">00:00</span>
+                <span id="expCurrentTime">00:00</span>
+                <input type="range" id="expAudioSlider" class="audio-slider" value="0" max="100">
+                <span id="expDuration">00:00</span>
             </div>
-
-            <div class="audio-main-controls">
-                <button class="audio-ctrl-btn" onclick="skipAudio(-10)">↺</button>
-                <button class="audio-ctrl-btn" onclick="prevNextAudio('prev')">⏮</button>
-                <button class="audio-ctrl-btn play-btn" id="fullPlayPauseBtn" onclick="toggleFullPlayPause()">▶</button>
-                <button class="audio-ctrl-btn" onclick="prevNextAudio('next')">⏭</button>
-                <button class="audio-ctrl-btn" onclick="skipAudio(10)">↻</button>
+            <div class="expanded-btns">
+                <button class="expanded-btn" onclick="skipAudioTime(-10)">⏪</button>
+                <button id="expPlayBtn" class="expanded-btn play-pause-btn" onclick="toggleGlobalAudioPlay()">⏸</button>
+                <button class="expanded-btn" onclick="skipAudioTime(10)">⏩</button>
             </div>
         </div>
     </div>
 
     <div class="curved-nav-wrapper">
-        <div class="nav-item active" onclick="switchMainTab('videos', this)">
-            <div class="nav-icon">🎬</div>
-            <div class="nav-text">الفيديوهات</div>
-        </div>
-        <div class="nav-item" onclick="switchMainTab('live', this)">
-            <div class="nav-icon">📺</div>
-            <div class="nav-text">البث المباشر</div>
-        </div>
-        <div class="nav-item" onclick="switchMainTab('audio', this)">
-            <div class="nav-icon">🎧</div>
-            <div class="nav-text">الصوتيات</div>
-        </div>
-        <div class="nav-item" onclick="switchMainTab('playlists', this)">
-            <div class="nav-icon">📑</div>
-            <div class="nav-text">قوائم التشغيل</div>
-        </div>
+        <div class="nav-item active" onclick="switchMainTab('videos', this)"><div class="nav-icon">🎬</div><div class="nav-text">الفيديوهات</div></div>
+        <div class="nav-item" onclick="switchMainTab('live', this)"><div class="nav-icon">📺</div><div class="nav-text">البث المباشر</div></div>
+        <div class="nav-item" onclick="switchMainTab('audio', this)"><div class="nav-icon">🎧</div><div class="nav-text">الصوتيات</div></div>
+        <div class="nav-item" onclick="switchMainTab('playlists', this)"><div class="nav-icon">📑</div><div class="nav-text">قوائم التشغيل</div></div>
     </div>
 
     <div class="player-modal" id="playerModal">
         <div class="player-header">
             <span id="playerTitle" style="font-weight: bold; color: white;"></span>
             <div>
-                <button class="btn-icon" onclick="toggleFullscreen()">ملء الشاشة 🔲</button>
+                <!-- تمت إزالة زر ملء الشاشة من هنا بناءً على طلبك -->
                 <button class="btn-icon" onclick="closePlayer()">إغلاق ✖</button>
             </div>
         </div>
@@ -444,6 +257,7 @@
         <iframe id="youtubeIframe" style="display:none; width:100%; height:80vh; border:none;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
 
+    <!-- لوحة التحكم (تم الاحتفاظ بها كما هي) -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-content">
             <div class="admin-nav">
@@ -468,90 +282,27 @@
                 </div>
 
                 <div id="videoSpecificFields">
-                    <div class="form-group">
-                        <label>النوع / التصنيف:</label>
-                        <select id="mediaTypeSelect" onchange="checkCustomInput('mediaTypeSelect', 'customTypeGroup')">
-                        </select>
-                    </div>
-                    <div class="form-group" id="customTypeGroup" style="display:none;">
-                        <input type="text" id="customTypeInput" placeholder="أدخل اسم النوع الجديد هنا...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>الوقت واليوم (اختياري):</label>
-                        <input type="text" id="mediaTimeDay" placeholder="مثال: ليلة 10 أو صباح الجمعة">
-                    </div>
-
+                    <div class="form-group"><label>النوع / التصنيف:</label><select id="mediaTypeSelect" onchange="checkCustomInput('mediaTypeSelect', 'customTypeGroup')"></select></div>
+                    <div class="form-group" id="customTypeGroup" style="display:none;"><input type="text" id="customTypeInput" placeholder="أدخل اسم النوع الجديد هنا..."></div>
+                    <div class="form-group"><label>الوقت واليوم (اختياري):</label><input type="text" id="mediaTimeDay" placeholder="مثال: ليلة 10 أو صباح الجمعة"></div>
                     <div class="form-group">
                         <label>الشهر الهجري:</label>
                         <select id="mediaHijriMonthSelect">
-                            <option value="">بدون تحديد شهر</option>
-                            <option value="شهر محرم">شهر محرم</option>
-                            <option value="شهر صفر">شهر صفر</option>
-                            <option value="شهر ربيع الأول">شهر ربيع الأول</option>
-                            <option value="شهر ربيع الآخر">شهر ربيع الآخر</option>
-                            <option value="شهر جمادى الأولى">شهر جمادى الأولى</option>
-                            <option value="شهر جمادى الآخرة">شهر جمادى الآخرة</option>
-                            <option value="شهر رجب">شهر رجب</option>
-                            <option value="شهر شعبان">شهر شعبان</option>
-                            <option value="شهر رمضان">شهر رمضان</option>
-                            <option value="شهر شوال">شهر شوال</option>
-                            <option value="شهر ذو القعدة">شهر ذو القعدة</option>
-                            <option value="شهر ذو الحجة">شهر ذو الحجة</option>
+                            <option value="">بدون تحديد شهر</option><option value="شهر محرم">شهر محرم</option><option value="شهر صفر">شهر صفر</option><option value="شهر ربيع الأول">شهر ربيع الأول</option><option value="شهر ربيع الآخر">شهر ربيع الآخر</option><option value="شهر جمادى الأولى">شهر جمادى الأولى</option><option value="شهر جمادى الآخرة">شهر جمادى الآخرة</option><option value="شهر رجب">شهر رجب</option><option value="شهر شعبان">شهر شعبان</option><option value="شهر رمضان">شهر رمضان</option><option value="شهر شوال">شهر شوال</option><option value="شهر ذو القعدة">شهر ذو القعدة</option><option value="شهر ذو الحجة">شهر ذو الحجة</option>
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label>السنة الهجرية:</label>
-                        <select id="mediaHijriYearSelect" onchange="checkCustomInput('mediaHijriYearSelect', 'customYearGroup')">
-                        </select>
-                    </div>
-                    <div class="form-group" id="customYearGroup" style="display:none;">
-                        <input type="text" id="customYearInput" placeholder="أدخل السنة الهجرية الجديدة (مثال: 1448 هـ)...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>الموقع / المكان:</label>
-                        <input type="text" id="mediaLocation" placeholder="مثال: حسينية الشعباوي في البصرة">
-                    </div>
-
-                    <div class="form-group">
-                        <label>القارئ / الملا / الرادود:</label>
-                        <select id="mediaReciterSelect" onchange="checkCustomInput('mediaReciterSelect', 'customReciterGroup')">
-                        </select>
-                    </div>
-                    <div class="form-group" id="customReciterGroup" style="display:none;">
-                        <input type="text" id="customReciterInput" placeholder="أدخل اسم القارئ الجديد هنا...">
-                    </div>
+                    <div class="form-group"><label>السنة الهجرية:</label><select id="mediaHijriYearSelect" onchange="checkCustomInput('mediaHijriYearSelect', 'customYearGroup')"></select></div>
+                    <div class="form-group" id="customYearGroup" style="display:none;"><input type="text" id="customYearInput" placeholder="أدخل السنة الهجرية الجديدة (مثال: 1448 هـ)..."></div>
+                    <div class="form-group"><label>الموقع / المكان:</label><input type="text" id="mediaLocation" placeholder="مثال: حسينية الشعباوي في البصرة"></div>
+                    <div class="form-group"><label>القارئ / الملا / الرادود:</label><select id="mediaReciterSelect" onchange="checkCustomInput('mediaReciterSelect', 'customReciterGroup')"></select></div>
+                    <div class="form-group" id="customReciterGroup" style="display:none;"><input type="text" id="customReciterInput" placeholder="أدخل اسم القارئ الجديد هنا..."></div>
                 </div>
                 
-                <div class="form-group">
-                    <label id="titleLabel">العنوان الرئيسي للمجلس / المقطع:</label>
-                    <input type="text" id="mediaTitle" placeholder="أدخل العنوان هنا...">
-                </div>
-
-                <div class="form-group" id="playlistSelectGroup">
-                    <label>إضافة إلى قائمة تشغيل (اختياري):</label>
-                    <select id="mediaPlaylistId">
-                        <option value="">بدون قائمة تشغيل</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>رابط الصورة المصغرة (اختياري):</label>
-                    <input type="text" id="thumbUrl" placeholder="https://example.com/image.jpg">
-                </div>
-
-                <div class="form-group" id="videoUrlGroup">
-                    <label id="videoUrlLabel">رابط الفيديو:</label>
-                    <input type="text" id="videoUrl" placeholder="أدخل رابط مقطع يوتيوب...">
-                </div>
-
-                <div class="form-group" id="audioUrlGroup">
-                    <label>رابط صوتية MP3 (اختياري لظهوره بقسم الصوتيات):</label>
-                    <input type="text" id="audioUrl" placeholder="https://example.com/audio.mp3">
-                </div>
-
+                <div class="form-group"><label id="titleLabel">العنوان الرئيسي للمجلس / المقطع:</label><input type="text" id="mediaTitle" placeholder="أدخل العنوان هنا..."></div>
+                <div class="form-group" id="playlistSelectGroup"><label>إضافة إلى قائمة تشغيل (اختياري):</label><select id="mediaPlaylistId"><option value="">بدون قائمة تشغيل</option></select></div>
+                <div class="form-group"><label>رابط الصورة المصغرة (اختياري):</label><input type="text" id="thumbUrl" placeholder="https://example.com/image.jpg"></div>
+                <div class="form-group" id="videoUrlGroup"><label id="videoUrlLabel">رابط الفيديو:</label><input type="text" id="videoUrl" placeholder="أدخل رابط مقطع يوتيوب..."></div>
+                <div class="form-group" id="audioUrlGroup"><label>رابط صوتية MP3 (اختياري لظهوره بقسم الصوتيات):</label><input type="text" id="audioUrl" placeholder="https://example.com/audio.mp3"></div>
                 <button class="btn" id="saveBtn" onclick="saveMedia()">نشر أونلاين فوراً ⚡</button>
                 <button class="btn btn-warning" id="cancelEditBtn" style="display:none;" onclick="resetAdminForm()">إلغاء التعديل</button>
             </div>
@@ -567,76 +318,47 @@
                 <div class="form-group">
                     <label>اختر القسم المراد تغيير ترتيبه:</label>
                     <select id="reorderCategorySelect" onchange="renderReorderList()">
-                        <option value="videos">🎬 الفيديوهات والصوتيات</option>
-                        <option value="live">📺 البث المباشر</option>
-                        <option value="playlists">📑 قوائم التشغيل</option>
-                        <option value="types">≡ خيارات الأنواع / التصنيفات</option>
-                        <option value="reciters">🎙️ خيارات القراء والرواديد</option>
-                        <option value="years">📅 خيارات السنوات الهجرية</option>
+                        <option value="videos">🎬 الفيديوهات والصوتيات</option><option value="live">📺 البث المباشر</option><option value="playlists">📑 قوائم التشغيل</option><option value="types">≡ خيارات الأنواع / التصنيفات</option><option value="reciters">🎙️ خيارات القراء والرواديد</option><option value="years">📅 خيارات السنوات الهجرية</option>
                     </select>
                 </div>
-
                 <div class="manage-list" id="reorderListContainer"></div>
                 <button class="btn btn-blue" onclick="saveNewOrder()" style="margin-top:10px;">حفظ الترتيب الجديد أونلاين 💾</button>
             </div>
 
             <div id="deleteSection" style="display: none;">
                 <h3 style="margin-top:0; color:#d32f2f;">حذف محتوى أو خيارات</h3>
-                
                 <div class="form-group">
                     <label style="color: #ccc;">اختر نوع العنصر المراد حذفه:</label>
                     <select id="deleteCategorySelect" onchange="filterManageList('delete')">
-                        <option value="items">🎬 الفيديوهات والصوتيات وقوائم التشغيل</option>
-                        <option value="types">≡ الأنواع / التصنيفات</option>
-                        <option value="reciters">🎙️ القراء والرواديد</option>
-                        <option value="years">📅 السنوات الهجرية</option>
+                        <option value="items">🎬 الفيديوهات والصوتيات وقوائم التشغيل</option><option value="types">≡ الأنواع / التصنيفات</option><option value="reciters">🎙️ القراء والرواديد</option><option value="years">📅 السنوات الهجرية</option>
                     </select>
                 </div>
-
                 <input type="text" class="manage-search" id="deleteSearchInput" placeholder="ابحث لحذف..." oninput="filterManageList('delete')">
                 <div class="manage-list" id="deleteListContainer"></div>
             </div>
 
             <div id="eventSection" style="display: none;">
                 <h3 style="margin-top:0; color:#fbc02d;">إدارة شريط المناسبات (الأعلى)</h3>
-                
-                <div class="form-group">
-                    <label>حالة الشريط:</label>
-                    <select id="eventStatus">
-                        <option value="active">مفعل (يظهر للناس)</option>
-                        <option value="inactive">معطل (مخفي)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>نوع المحتوى:</label>
-                    <select id="eventType" onchange="toggleEventFields()">
-                        <option value="text">نص (اسم مناسبة)</option>
-                        <option value="countdown">عداد تنازلي</option>
-                        <option value="image">صورة</option>
-                        <option value="audio">صوتية 🎧</option>
-                        <option value="video">فيديو 🎬</option>
-                    </select>
-                </div>
-
-                <div class="form-group" id="eventContentGroup">
-                    <label id="eventContentLabel">النص أو الرابط:</label>
-                    <input type="text" id="eventContentInput" placeholder="أدخل النص أو الرابط هنا...">
-                </div>
-
-                <div class="form-group" id="eventTimeGroup" style="display:none;">
-                    <label>وقت انتهاء العداد التنازلي:</label>
-                    <input type="datetime-local" id="eventTimeInput">
-                </div>
-
+                <div class="form-group"><label>حالة الشريط:</label><select id="eventStatus"><option value="active">مفعل (يظهر للناس)</option><option value="inactive">معطل (مخفي)</option></select></div>
+                <div class="form-group"><label>نوع المحتوى:</label><select id="eventType" onchange="toggleEventFields()"><option value="text">نص (اسم مناسبة)</option><option value="countdown">عداد تنازلي</option><option value="image">صورة</option><option value="audio">صوتية 🎧</option><option value="video">فيديو 🎬</option></select></div>
+                <div class="form-group" id="eventContentGroup"><label id="eventContentLabel">النص أو الرابط:</label><input type="text" id="eventContentInput" placeholder="أدخل النص أو الرابط هنا..."></div>
+                <div class="form-group" id="eventTimeGroup" style="display:none;"><label>وقت انتهاء العداد التنازلي:</label><input type="datetime-local" id="eventTimeInput"></div>
                 <button class="btn" style="background:#fbc02d; color:#000;" onclick="saveEventBanner()">حفظ الشريط أونلاين 🚀</button>
             </div>
-
             <button class="btn btn-danger" style="margin-top:15px;" onclick="closeAdmin()">إغلاق اللوحة</button>
         </div>
     </div>
 
     <script>
+        // --- تفعيل ميزة التخزين للعمل بدون انترنت (Service Worker) ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').then(reg => {
+                    console.log('تم تفعيل التخزين المؤقت بنجاح - سيعمل بدون انترنت!');
+                }).catch(err => console.log('خطأ في تفعيل الأوفلاين:', err));
+            });
+        }
+
         const JSONBIN_BIN_ID = "6a79f05dda38895dfed18676"; 
         const JSONBIN_API_KEY = "$2a$10$XafrSMTB7eR.GSTbU7rCjeUZsM1YExTMdPfMlbrq3yY/113XyM9YC";
 
@@ -649,19 +371,15 @@
 
         let currentCategory = 'videos';
         let activePlaylistId = null;
-
         let selectedFilters = { months: [], years: [], types: [], reciters: [] };
         let currentActiveFilterType = null;
+        let currentPlayingItem = null;
 
         function fetchOnlineData(callback) {
             const localData = localStorage.getItem('hussainiyaData');
-            if (localData) {
-                parseAndRenderData(JSON.parse(localData));
-            }
+            if (localData) parseAndRenderData(JSON.parse(localData));
 
-            fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-                headers: { 'X-Master-Key': JSONBIN_API_KEY }
-            })
+            fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, { headers: { 'X-Master-Key': JSONBIN_API_KEY } })
             .then(res => res.json())
             .then(data => {
                 const root = data.record;
@@ -671,243 +389,206 @@
             })
             .catch(err => {
                 console.error("خطأ في الاتصال:", err);
-                if (!localData) {
-                    document.getElementById('videoContainer').innerHTML = '<p style="text-align: center; color: red;">عذراً، فشل الاتصال بالسيرفر! تأكد من شبكة الإنترنت.</p>';
-                }
+                if (!localData) document.getElementById('videoContainer').innerHTML = '<p style="text-align: center; color: red;">لا يوجد اتصال بالإنترنت!</p>';
             });
         }
 
         function parseAndRenderData(root) {
-            if (Array.isArray(root)) {
-                cachedMediaItems = root;
-            } else {
+            if (Array.isArray(root)) cachedMediaItems = root;
+            else {
                 cachedMediaItems = root.items || [];
                 customTypesList = root.customTypes || [];
                 customRecitersList = root.customReciters || [];
                 customYearsList = root.customYears || [];
                 if (root.eventBanner) eventBannerData = root.eventBanner;
             }
-
             cachedMediaItems.forEach(item => {
-                if (item.type && item.type.trim() && !customTypesList.includes(item.type.trim())) {
-                    customTypesList.push(item.type.trim());
-                }
-                if (item.year && item.year.trim() && !customYearsList.includes(item.year.trim())) {
-                    customYearsList.push(item.year.trim());
-                }
-                if (item.reciter && item.reciter.trim() && !customRecitersList.includes(item.reciter.trim())) {
-                    customRecitersList.push(item.reciter.trim());
-                }
+                if (item.type && item.type.trim() && !customTypesList.includes(item.type.trim())) customTypesList.push(item.type.trim());
+                if (item.year && item.year.trim() && !customYearsList.includes(item.year.trim())) customYearsList.push(item.year.trim());
+                if (item.reciter && item.reciter.trim() && !customRecitersList.includes(item.reciter.trim())) customRecitersList.push(item.reciter.trim());
             });
-
-            populatePlaylistDropdown();
-            populateAdminDropdowns();
-            loadMedia();
-            renderEventBanner();
+            populatePlaylistDropdown(); populateAdminDropdowns(); loadMedia(); renderEventBanner();
         }
 
         function syncOnlineData(callback) {
-            const dataToSave = {
-                items: cachedMediaItems,
-                customTypes: customTypesList,
-                customReciters: customRecitersList,
-                customYears: customYearsList,
-                eventBanner: eventBannerData
-            };
-
-            fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': JSONBIN_API_KEY
-                },
-                body: JSON.stringify(dataToSave)
-            })
+            const dataToSave = { items: cachedMediaItems, customTypes: customTypesList, customReciters: customRecitersList, customYears: customYearsList, eventBanner: eventBannerData };
+            fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_API_KEY }, body: JSON.stringify(dataToSave) })
             .then(res => res.json())
             .then(() => fetchOnlineData(callback))
             .catch(err => alert("حدث خطأ أثناء حفظ البيانات بالسيرفر!"));
         }
 
-        window.onload = function() { 
-            fetchOnlineData(); 
-            setupMediaSessionHandlers();
-        };
+        window.onload = function() { fetchOnlineData(); setupMediaSessionHandlers(); setupCustomAudioControls(); };
+
+        /* ------------------ أكواد المشغل الصوتي المخصص ------------------ */
+        const globalAudio = document.getElementById('globalAudioPlayer');
+        const expSlider = document.getElementById('expAudioSlider');
+        const expCurrentTime = document.getElementById('expCurrentTime');
+        const expDuration = document.getElementById('expDuration');
+        const expPlayBtn = document.getElementById('expPlayBtn');
+        const stickyPlayBtn = document.getElementById('stickyPlayBtn');
+
+        function setupCustomAudioControls() {
+            globalAudio.addEventListener('timeupdate', () => {
+                if (globalAudio.duration) {
+                    const progress = (globalAudio.currentTime / globalAudio.duration) * 100;
+                    expSlider.value = progress;
+                    expCurrentTime.innerText = formatTime(globalAudio.currentTime);
+                }
+            });
+            globalAudio.addEventListener('loadedmetadata', () => {
+                expDuration.innerText = formatTime(globalAudio.duration);
+            });
+            globalAudio.addEventListener('play', () => { expPlayBtn.innerText = '⏸'; stickyPlayBtn.innerText = '⏸'; });
+            globalAudio.addEventListener('pause', () => { expPlayBtn.innerText = '▶️'; stickyPlayBtn.innerText = '▶️'; });
+            
+            expSlider.addEventListener('input', () => {
+                if (globalAudio.duration) {
+                    globalAudio.currentTime = (expSlider.value / 100) * globalAudio.duration;
+                }
+            });
+        }
+
+        function formatTime(sec) {
+            if (isNaN(sec)) return "00:00";
+            const m = Math.floor(sec / 60); const s = Math.floor(sec % 60);
+            return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        function toggleGlobalAudioPlay() {
+            if (globalAudio.paused) globalAudio.play(); else globalAudio.pause();
+        }
+
+        function skipAudioTime(sec) {
+            globalAudio.currentTime += sec;
+        }
+
+        function playBackgroundAudio(item) {
+            currentPlayingItem = item;
+            const stickyBar = document.getElementById('stickyAudioPlayer');
+            const ytId = getYoutubeId(item.videoUrl);
+            let thumbSrc = item.thumbUrl;
+            if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+            if (!thumbSrc) thumbSrc = 'https://e.top4top.io/p_3874hbdrg1.jpg';
+
+            document.getElementById('audioTitleDisplay').innerText = item.title;
+            globalAudio.src = item.audioUrl || item.videoUrl;
+            stickyBar.style.display = 'flex';
+            
+            updateMediaSession(item, thumbSrc);
+            globalAudio.play();
+        }
+
+        function openExpandedAudioModal() {
+            if(!currentPlayingItem) return;
+            document.getElementById('expandedAudioModal').style.display = 'flex';
+            
+            let thumbSrc = currentPlayingItem.thumbUrl;
+            const ytId = getYoutubeId(currentPlayingItem.videoUrl);
+            if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+            if (!thumbSrc) thumbSrc = 'https://e.top4top.io/p_3874hbdrg1.jpg';
+            
+            document.getElementById('expAudioCover').src = thumbSrc;
+            document.getElementById('expAudioTitle').innerText = currentPlayingItem.title;
+            document.getElementById('expAudioDesc').innerHTML = `
+                ${currentPlayingItem.dateText ? currentPlayingItem.dateText + '<br>' : ''}
+                ${currentPlayingItem.location ? currentPlayingItem.location + '<br>' : ''}
+                ${currentPlayingItem.reciter ? 'القارئ: ' + currentPlayingItem.reciter : ''}
+            `;
+        }
+
+        function closeExpandedAudioModal() {
+            document.getElementById('expandedAudioModal').style.display = 'none';
+        }
+
+        function closeAudioPlayer() { globalAudio.pause(); document.getElementById('stickyAudioPlayer').style.display = 'none'; }
+        /* --------------------------------------------------------------- */
 
         function toggleEventFields() {
             const type = document.getElementById('eventType').value;
             const timeGroup = document.getElementById('eventTimeGroup');
             const contentLabel = document.getElementById('eventContentLabel');
-            
-            if (type === 'countdown') {
-                timeGroup.style.display = 'block';
-                contentLabel.innerText = 'عنوان العداد (مثال: نلتقيكم بعد):';
-            } else {
-                timeGroup.style.display = 'none';
-                contentLabel.innerText = (type === 'text') ? 'النص:' : 'الرابط:';
-            }
+            if (type === 'countdown') { timeGroup.style.display = 'block'; contentLabel.innerText = 'عنوان العداد:'; }
+            else { timeGroup.style.display = 'none'; contentLabel.innerText = (type === 'text') ? 'النص:' : 'الرابط:'; }
         }
 
         function saveEventBanner() {
-            eventBannerData = {
-                status: document.getElementById('eventStatus').value,
-                type: document.getElementById('eventType').value,
-                content: document.getElementById('eventContentInput').value.trim(),
-                targetTime: document.getElementById('eventTimeInput').value
-            };
-            
+            eventBannerData = { status: document.getElementById('eventStatus').value, type: document.getElementById('eventType').value, content: document.getElementById('eventContentInput').value.trim(), targetTime: document.getElementById('eventTimeInput').value };
             document.getElementById('navEventBtn').innerText = "جاري الحفظ...";
-            syncOnlineData(() => {
-                document.getElementById('navEventBtn').innerText = "🎉 المناسبات";
-                alert('تم تحديث شريط المناسبات بنجاح!');
-                closeAdmin();
-            });
+            syncOnlineData(() => { document.getElementById('navEventBtn').innerText = "🎉 المناسبات"; alert('تم التحديث!'); closeAdmin(); });
         }
 
         function renderEventBanner() {
             const container = document.getElementById('eventBannerContainer');
             const contentDiv = document.getElementById('eventBannerContent');
             clearInterval(countdownInterval);
-
-            if (!eventBannerData || eventBannerData.status === 'inactive' || !eventBannerData.content) {
-                container.style.display = 'none';
-                return;
-            }
-
+            if (!eventBannerData || eventBannerData.status === 'inactive' || !eventBannerData.content) { container.style.display = 'none'; return; }
             container.style.display = 'block';
-
-            if (eventBannerData.type === 'text') {
-                contentDiv.innerHTML = eventBannerData.content;
-            } else if (eventBannerData.type === 'image') {
-                contentDiv.innerHTML = `<img src="${eventBannerData.content}" class="event-thumbnail">`;
-            } else if (eventBannerData.type === 'audio' || eventBannerData.type === 'video') {
-                contentDiv.innerHTML = `<span>${eventBannerData.content} ${eventBannerData.type === 'audio' ? '🎧' : '🎬'}</span>`;
-            } else if (eventBannerData.type === 'countdown') {
-                startCountdown(eventBannerData.targetTime, eventBannerData.content, contentDiv);
-            }
+            if (eventBannerData.type === 'text') contentDiv.innerHTML = eventBannerData.content;
+            else if (eventBannerData.type === 'image') contentDiv.innerHTML = `<img src="${eventBannerData.content}" class="event-thumbnail">`;
+            else if (eventBannerData.type === 'audio' || eventBannerData.type === 'video') contentDiv.innerHTML = `<span>${eventBannerData.content} ${eventBannerData.type === 'audio' ? '🎧' : '🎬'}</span>`;
+            else if (eventBannerData.type === 'countdown') startCountdown(eventBannerData.targetTime, eventBannerData.content, contentDiv);
         }
 
         function startCountdown(targetTime, prefix, element) {
             const targetDate = new Date(targetTime).getTime();
-            
             countdownInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    element.innerHTML = prefix + " (انتهى الوقت)";
-                    return;
-                }
-
+                const now = new Date().getTime(); const distance = targetDate - now;
+                if (distance < 0) { clearInterval(countdownInterval); element.innerHTML = prefix + " (انتهى الوقت)"; return; }
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
                 element.innerHTML = `${prefix}: ${hours}س ${minutes}د ${seconds}ث`;
             }, 1000);
         }
 
         function handleEventBannerClick() {
             if (!eventBannerData || eventBannerData.status === 'inactive') return;
-            
-            if (eventBannerData.type === 'video') {
-                playVideo({ title: 'مناسبة خاصة', videoUrl: eventBannerData.content });
-            } else if (eventBannerData.type === 'audio') {
-                playBackgroundAudio({ title: 'مناسبة خاصة', audioUrl: eventBannerData.content, videoUrl: eventBannerData.content });
-            } else if (eventBannerData.type === 'image') {
-                document.getElementById('detailsImg').src = eventBannerData.content;
-                document.getElementById('detailsTitle').innerText = "مناسبة خاصة";
-                document.getElementById('detailsDate').innerText = "";
-                document.getElementById('detailsModalOverlay').style.display = 'flex';
-            }
+            if (eventBannerData.type === 'video') playVideo({ title: 'مناسبة خاصة', videoUrl: eventBannerData.content });
+            else if (eventBannerData.type === 'audio') playBackgroundAudio({ title: 'مناسبة خاصة', audioUrl: eventBannerData.content, videoUrl: eventBannerData.content });
+            else if (eventBannerData.type === 'image') { document.getElementById('detailsImg').src = eventBannerData.content; document.getElementById('detailsTitle').innerText = "مناسبة خاصة"; document.getElementById('detailsDate').innerText = ""; document.getElementById('detailsModalOverlay').style.display = 'flex'; }
         }
 
         function populatePlaylistDropdown() {
-            const select = document.getElementById('mediaPlaylistId');
-            if (!select) return;
+            const select = document.getElementById('mediaPlaylistId'); if (!select) return;
             select.innerHTML = '<option value="">بدون قائمة تشغيل</option>';
-            const playlists = cachedMediaItems.filter(i => i.category === 'playlists');
-            playlists.forEach(pl => { select.innerHTML += `<option value="${pl.id}">${pl.title}</option>`; });
+            cachedMediaItems.filter(i => i.category === 'playlists').forEach(pl => { select.innerHTML += `<option value="${pl.id}">${pl.title}</option>`; });
         }
 
         function populateAdminDropdowns() {
-            const typeSelect = document.getElementById('mediaTypeSelect');
-            const reciterSelect = document.getElementById('mediaReciterSelect');
-            const yearSelect = document.getElementById('mediaHijriYearSelect');
-
-            typeSelect.innerHTML = '<option value="">بدون تحديد تصنيف</option>' + 
-                customTypesList.map(t => `<option value="${t}">${t}</option>`).join('') + 
-                '<option value="__NEW__">➕ إضافة نوع جديد...</option>';
-
-            reciterSelect.innerHTML = '<option value="">بدون تحديد قارئ</option>' + 
-                customRecitersList.map(r => `<option value="${r}">${r}</option>`).join('') + 
-                '<option value="__NEW__">➕ إضافة قارئ جديد...</option>';
-
-            yearSelect.innerHTML = '<option value="">بدون تحديد سنة</option>' + 
-                customYearsList.map(y => `<option value="${y}">${y}</option>`).join('') + 
-                '<option value="__NEW__">➕ إضافة سنة جديدة...</option>';
+            document.getElementById('mediaTypeSelect').innerHTML = '<option value="">بدون تحديد تصنيف</option>' + customTypesList.map(t => `<option value="${t}">${t}</option>`).join('') + '<option value="__NEW__">➕ إضافة نوع جديد...</option>';
+            document.getElementById('mediaReciterSelect').innerHTML = '<option value="">بدون تحديد قارئ</option>' + customRecitersList.map(r => `<option value="${r}">${r}</option>`).join('') + '<option value="__NEW__">➕ إضافة قارئ جديد...</option>';
+            document.getElementById('mediaHijriYearSelect').innerHTML = '<option value="">بدون تحديد سنة</option>' + customYearsList.map(y => `<option value="${y}">${y}</option>`).join('') + '<option value="__NEW__">➕ إضافة سنة جديدة...</option>';
         }
 
-        function checkCustomInput(selectId, groupClass) {
-            const select = document.getElementById(selectId);
-            const customGroup = document.getElementById(groupClass);
-            if (select.value === '__NEW__') {
-                customGroup.style.display = 'block';
-            } else {
-                customGroup.style.display = 'none';
-            }
-        }
-
+        function checkCustomInput(selectId, groupClass) { document.getElementById(groupClass).style.display = document.getElementById(selectId).value === '__NEW__' ? 'block' : 'none'; }
         function showLogoModal() { document.getElementById('logoModal').style.display = 'flex'; }
         function closeLogoModal() { document.getElementById('logoModal').style.display = 'none'; }
 
         function switchMainTab(category, elem) {
-            currentCategory = category;
-            activePlaylistId = null;
+            currentCategory = category; activePlaylistId = null;
             document.querySelectorAll('.curved-nav-wrapper .nav-item').forEach(tab => tab.classList.remove('active'));
             elem.classList.add('active');
-
-            const filterBar = document.getElementById('mainFilterBar');
-            filterBar.style.display = (category === 'videos' || category === 'audio') ? 'flex' : 'none';
-
+            document.getElementById('mainFilterBar').style.display = (category === 'videos' || category === 'audio') ? 'flex' : 'none';
             loadMedia();
         }
 
         function openDetailsModal(itemId, event) {
             if (event) event.stopPropagation();
-            const item = cachedMediaItems.find(i => i.id === itemId);
-            if (!item) return;
-
+            const item = cachedMediaItems.find(i => i.id === itemId); if (!item) return;
             const ytId = getYoutubeId(item.videoUrl);
-            let thumbSrc = item.thumbUrl;
-            if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+            let thumbSrc = item.thumbUrl; if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
             if (!thumbSrc) thumbSrc = 'https://via.placeholder.com/150x150/1a1a1a/ffffff?text=شعار';
-
-            document.getElementById('detailsImg').src = thumbSrc;
-            document.getElementById('detailsTitle').innerText = item.title;
-            document.getElementById('detailsDate').innerText = item.dateText || "غير محدد";
-            document.getElementById('detailsLocation').innerText = item.location || "غير محدد";
-            document.getElementById('detailsReciter').innerText = item.reciter || "غير محدد";
-            document.getElementById('detailsType').innerText = item.type || "عام";
-
+            document.getElementById('detailsImg').src = thumbSrc; document.getElementById('detailsTitle').innerText = item.title; document.getElementById('detailsDate').innerText = item.dateText || "غير محدد"; document.getElementById('detailsLocation').innerText = item.location || "غير محدد"; document.getElementById('detailsReciter').innerText = item.reciter || "غير محدد"; document.getElementById('detailsType').innerText = item.type || "عام";
             document.getElementById('detailsModalOverlay').style.display = 'flex';
         }
-
-        function closeDetailsModal() {
-            document.getElementById('detailsModalOverlay').style.display = 'none';
-        }
+        function closeDetailsModal() { document.getElementById('detailsModalOverlay').style.display = 'none'; }
 
         function updateMediaSession(item, thumbSrc) {
             if ('mediaSession' in navigator) {
-                navigator.mediaSession.metadata = new MediaMetadata({
-                    title: item.title,
-                    artist: item.reciter || 'حسينية الشعباوي',
-                    album: item.location || 'تطبيق حسينية الشعباوي',
-                    artwork: [{ src: thumbSrc, sizes: '512x512', type: 'image/png' }]
-                });
+                navigator.mediaSession.metadata = new MediaMetadata({ title: item.title, artist: item.reciter || 'حسينية الشعباوي', album: item.location || 'تطبيق حسينية الشعباوي', artwork: [{ src: thumbSrc, sizes: '512x512', type: 'image/png' }] });
             }
         }
-
         function setupMediaSessionHandlers() {
             if ('mediaSession' in navigator) {
                 const audioPlayer = document.getElementById('globalAudioPlayer');
@@ -920,700 +601,197 @@
             currentActiveFilterType = type;
             const overlay = document.getElementById('filterModalOverlay');
             const titleElem = document.getElementById('filterModalTitle');
-            const optionsList = document.getElementById('filterOptionsList');
-            optionsList.innerHTML = '';
-
+            const optionsList = document.getElementById('filterOptionsList'); optionsList.innerHTML = '';
             if (type === 'date') {
                 titleElem.innerText = 'منقي الأشهر والسنوات الهجرية';
                 const defaultMonths = ["شهر محرم", "شهر صفر", "شهر ربيع الأول", "شهر ربيع الآخر", "شهر جمادى الأولى", "شهر جمادى الآخرة", "شهر رجب", "شهر شعبان", "شهر رمضان", "شهر شوال", "شهر ذو القعدة", "شهر ذو الحجة"];
-                
-                let monthSec = document.createElement('div');
-                monthSec.className = 'filter-section-title';
-                monthSec.innerText = '🌙 اختر الشهر الهجري:';
-                optionsList.appendChild(monthSec);
-
-                defaultMonths.forEach(m => {
-                    const isChecked = selectedFilters.months.includes(m);
-                    const row = document.createElement('label');
-                    row.className = 'filter-option-item';
-                    row.innerHTML = `<span>${m}</span><input type="checkbox" class="month-cb" value="${m}" ${isChecked ? 'checked' : ''}>`;
-                    optionsList.appendChild(row);
-                });
-
-                let yearSec = document.createElement('div');
-                yearSec.className = 'filter-section-title';
-                yearSec.innerText = '📅 اختر السنة الهجرية:';
-                optionsList.appendChild(yearSec);
-
-                if (customYearsList.length === 0) {
-                    let emptyTip = document.createElement('p');
-                    emptyTip.style.cssText = "color:#777; font-size:13px; padding:5px 0;";
-                    emptyTip.innerText = "لم تقم بإضافة أي سنة هجرية بعد.";
-                    optionsList.appendChild(emptyTip);
-                } else {
-                    customYearsList.forEach(y => {
-                        const isChecked = selectedFilters.years.includes(y);
-                        const row = document.createElement('label');
-                        row.className = 'filter-option-item';
-                        row.innerHTML = `<span>${y}</span><input type="checkbox" class="year-cb" value="${y}" ${isChecked ? 'checked' : ''}>`;
-                        optionsList.appendChild(row);
-                    });
-                }
+                let monthSec = document.createElement('div'); monthSec.className = 'filter-section-title'; monthSec.innerText = '🌙 اختر الشهر الهجري:'; optionsList.appendChild(monthSec);
+                defaultMonths.forEach(m => { const isChecked = selectedFilters.months.includes(m); const row = document.createElement('label'); row.className = 'filter-option-item'; row.innerHTML = `<span>${m}</span><input type="checkbox" class="month-cb" value="${m}" ${isChecked ? 'checked' : ''}>`; optionsList.appendChild(row); });
+                let yearSec = document.createElement('div'); yearSec.className = 'filter-section-title'; yearSec.innerText = '📅 اختر السنة الهجرية:'; optionsList.appendChild(yearSec);
+                if (customYearsList.length === 0) optionsList.innerHTML += "<p style='color:#777; font-size:13px; padding:5px 0;'>لم تقم بإضافة أي سنة هجرية بعد.</p>";
+                else customYearsList.forEach(y => { const isChecked = selectedFilters.years.includes(y); const row = document.createElement('label'); row.className = 'filter-option-item'; row.innerHTML = `<span>${y}</span><input type="checkbox" class="year-cb" value="${y}" ${isChecked ? 'checked' : ''}>`; optionsList.appendChild(row); });
             } else if (type === 'type') {
                 titleElem.innerText = 'منقي التصنيف والأنواع';
-                if (customTypesList.length === 0) {
-                    optionsList.innerHTML = '<p style="color:#777; font-size:13px; text-align:center; padding:15px 0;">لم تقم بإضافة أي تصنيف بعد.</p>';
-                } else {
-                    customTypesList.forEach(val => {
-                        const isChecked = selectedFilters.types.includes(val);
-                        const row = document.createElement('label');
-                        row.className = 'filter-option-item';
-                        row.innerHTML = `<span>${val}</span><input type="checkbox" class="type-cb" value="${val}" ${isChecked ? 'checked' : ''}>`;
-                        optionsList.appendChild(row);
-                    });
-                }
+                if (customTypesList.length === 0) optionsList.innerHTML = '<p style="color:#777; font-size:13px; text-align:center; padding:15px 0;">لم تقم بإضافة أي تصنيف بعد.</p>';
+                else customTypesList.forEach(val => { const isChecked = selectedFilters.types.includes(val); const row = document.createElement('label'); row.className = 'filter-option-item'; row.innerHTML = `<span>${val}</span><input type="checkbox" class="type-cb" value="${val}" ${isChecked ? 'checked' : ''}>`; optionsList.appendChild(row); });
             } else if (type === 'reciter') {
                 titleElem.innerText = 'منقي القراء والرواديد';
-                if (customRecitersList.length === 0) {
-                    optionsList.innerHTML = '<p style="color:#777; font-size:13px; text-align:center; padding:15px 0;">لم تقم بإضافة أي رادود بعد.</p>';
-                } else {
-                    customRecitersList.forEach(val => {
-                        const isChecked = selectedFilters.reciters.includes(val);
-                        const row = document.createElement('label');
-                        row.className = 'filter-option-item';
-                        row.innerHTML = `<span>${val}</span><input type="checkbox" class="reciter-cb" value="${val}" ${isChecked ? 'checked' : ''}>`;
-                        optionsList.appendChild(row);
-                    });
-                }
+                if (customRecitersList.length === 0) optionsList.innerHTML = '<p style="color:#777; font-size:13px; text-align:center; padding:15px 0;">لم تقم بإضافة أي رادود بعد.</p>';
+                else customRecitersList.forEach(val => { const isChecked = selectedFilters.reciters.includes(val); const row = document.createElement('label'); row.className = 'filter-option-item'; row.innerHTML = `<span>${val}</span><input type="checkbox" class="reciter-cb" value="${val}" ${isChecked ? 'checked' : ''}>`; optionsList.appendChild(row); });
             }
-
             overlay.style.display = 'flex';
         }
 
         function clearCurrentCategoryFilters() {
-            if (currentActiveFilterType === 'date') {
-                selectedFilters.months = [];
-                selectedFilters.years = [];
-            } else if (currentActiveFilterType === 'type') {
-                selectedFilters.types = [];
-            } else if (currentActiveFilterType === 'reciter') {
-                selectedFilters.reciters = [];
-            }
+            if (currentActiveFilterType === 'date') { selectedFilters.months = []; selectedFilters.years = []; }
+            else if (currentActiveFilterType === 'type') selectedFilters.types = [];
+            else if (currentActiveFilterType === 'reciter') selectedFilters.reciters = [];
             openFilterModal(currentActiveFilterType);
         }
 
         function applySelectedFilters() {
-            if (currentActiveFilterType === 'date') {
-                selectedFilters.months = Array.from(document.querySelectorAll('.month-cb:checked')).map(cb => cb.value);
-                selectedFilters.years = Array.from(document.querySelectorAll('.year-cb:checked')).map(cb => cb.value);
-            } else if (currentActiveFilterType === 'type') {
-                selectedFilters.types = Array.from(document.querySelectorAll('.type-cb:checked')).map(cb => cb.value);
-            } else if (currentActiveFilterType === 'reciter') {
-                selectedFilters.reciters = Array.from(document.querySelectorAll('.reciter-cb:checked')).map(cb => cb.value);
-            }
-
-            document.getElementById('filterModalOverlay').style.display = 'none';
-            loadMedia();
+            if (currentActiveFilterType === 'date') { selectedFilters.months = Array.from(document.querySelectorAll('.month-cb:checked')).map(cb => cb.value); selectedFilters.years = Array.from(document.querySelectorAll('.year-cb:checked')).map(cb => cb.value); }
+            else if (currentActiveFilterType === 'type') selectedFilters.types = Array.from(document.querySelectorAll('.type-cb:checked')).map(cb => cb.value);
+            else if (currentActiveFilterType === 'reciter') selectedFilters.reciters = Array.from(document.querySelectorAll('.reciter-cb:checked')).map(cb => cb.value);
+            document.getElementById('filterModalOverlay').style.display = 'none'; loadMedia();
         }
 
         function toggleAdminFormFields() {
             const cat = document.getElementById('mediaCategory').value;
             const extraFields = document.getElementById('videoSpecificFields');
-            const audioGroup = document.getElementById('audioUrlGroup');
-            const videoGroup = document.getElementById('videoUrlGroup');
-            const videoLabel = document.getElementById('videoUrlLabel');
-            const titleLabel = document.getElementById('titleLabel');
-            const playlistGroup = document.getElementById('playlistSelectGroup');
-
-            populatePlaylistDropdown();
-            populateAdminDropdowns();
-
+            const audioGroup = document.getElementById('audioUrlGroup'); const videoGroup = document.getElementById('videoUrlGroup'); const videoLabel = document.getElementById('videoUrlLabel'); const titleLabel = document.getElementById('titleLabel'); const playlistGroup = document.getElementById('playlistSelectGroup');
+            populatePlaylistDropdown(); populateAdminDropdowns();
             extraFields.style.display = (cat === 'videos') ? 'block' : 'none';
-
-            if (cat === 'videos') {
-                videoGroup.style.display = 'block'; videoLabel.innerText = 'رابط الفيديو:';
-                audioGroup.style.display = 'block'; playlistGroup.style.display = 'block';
-                titleLabel.innerText = 'العنوان الرئيسي للمجلس / المقطع:';
-            } else if (cat === 'playlists') {
-                videoGroup.style.display = 'none'; audioGroup.style.display = 'none'; playlistGroup.style.display = 'none';
-                titleLabel.innerText = 'اسم قائمة التشغيل:';
-            } else {
-                videoGroup.style.display = 'block'; videoLabel.innerText = 'رابط البث المباشر:';
-                audioGroup.style.display = 'none'; playlistGroup.style.display = 'none';
-                titleLabel.innerText = 'عنوان البث المباشر:';
-            }
+            if (cat === 'videos') { videoGroup.style.display = 'block'; videoLabel.innerText = 'رابط الفيديو:'; audioGroup.style.display = 'block'; playlistGroup.style.display = 'block'; titleLabel.innerText = 'العنوان الرئيسي للمجلس / المقطع:'; }
+            else if (cat === 'playlists') { videoGroup.style.display = 'none'; audioGroup.style.display = 'none'; playlistGroup.style.display = 'none'; titleLabel.innerText = 'اسم قائمة التشغيل:'; }
+            else { videoGroup.style.display = 'block'; videoLabel.innerText = 'رابط البث المباشر:'; audioGroup.style.display = 'none'; playlistGroup.style.display = 'none'; titleLabel.innerText = 'عنوان البث المباشر:'; }
         }
 
-        function buildFullDateText(timeDay, month, year) {
-            let parts = [];
-            if (timeDay) parts.push(timeDay.trim());
-            if (month) parts.push(`من ${month.trim()}`);
-            if (year) {
-                let y = year.trim();
-                if (!y.includes('هـ')) y += ' هـ';
-                parts.push(y);
-            }
-            return parts.join(' ');
-        }
+        function buildFullDateText(timeDay, month, year) { let parts = []; if (timeDay) parts.push(timeDay.trim()); if (month) parts.push(`من ${month.trim()}`); if (year) { let y = year.trim(); if (!y.includes('هـ')) y += ' هـ'; parts.push(y); } return parts.join(' '); }
 
-        function checkAdminPass(event) {
-            if (event.key === "Enter") {
-                const val = document.getElementById('searchInput').value.trim();
-                if (val === 'kokoko') {
-                    document.getElementById('adminModal').style.display = 'flex';
-                    document.getElementById('searchInput').value = '';
-                    switchAdminTab('add');
-                }
-            }
-        }
-
+        function checkAdminPass(event) { if (event.key === "Enter" && document.getElementById('searchInput').value.trim() === 'kokoko') { document.getElementById('adminModal').style.display = 'flex'; document.getElementById('searchInput').value = ''; switchAdminTab('add'); } }
         function closeAdmin() { resetAdminForm(); document.getElementById('adminModal').style.display = 'none'; }
 
         function switchAdminTab(tab) {
-            document.getElementById('navAddBtn').className = (tab === 'add') ? 'active' : '';
-            document.getElementById('navEditBtn').className = (tab === 'edit') ? 'active' : '';
-            document.getElementById('navReorderBtn').className = (tab === 'reorder') ? 'active' : '';
-            document.getElementById('navDeleteBtn').className = (tab === 'delete') ? 'active' : '';
-            document.getElementById('navEventBtn').className = (tab === 'event') ? 'active' : '';
-
-            document.getElementById('addEditSection').style.display = (tab === 'add') ? 'block' : 'none';
-            document.getElementById('editSection').style.display = (tab === 'edit') ? 'block' : 'none';
-            document.getElementById('reorderSection').style.display = (tab === 'reorder') ? 'block' : 'none';
-            document.getElementById('deleteSection').style.display = (tab === 'delete') ? 'block' : 'none';
-            document.getElementById('eventSection').style.display = (tab === 'event') ? 'block' : 'none';
-
-            if (tab === 'add') toggleAdminFormFields();
-            if (tab === 'edit') filterManageList('edit');
-            if (tab === 'reorder') renderReorderList();
-            if (tab === 'delete') filterManageList('delete');
-            if (tab === 'event') {
-                document.getElementById('eventStatus').value = eventBannerData.status || 'inactive';
-                document.getElementById('eventType').value = eventBannerData.type || 'text';
-                document.getElementById('eventContentInput').value = eventBannerData.content || '';
-                document.getElementById('eventTimeInput').value = eventBannerData.targetTime || '';
-                toggleEventFields();
-            }
+            ['add','edit','reorder','delete','event'].forEach(t => {
+                document.getElementById('nav' + t.charAt(0).toUpperCase() + t.slice(1) + 'Btn').className = (tab === t) ? 'active' : '';
+                document.getElementById(t + 'Section').style.display = (tab === t) ? 'block' : 'none';
+            });
+            if (tab === 'add') toggleAdminFormFields(); if (tab === 'edit') filterManageList('edit'); if (tab === 'reorder') renderReorderList(); if (tab === 'delete') filterManageList('delete');
+            if (tab === 'event') { document.getElementById('eventStatus').value = eventBannerData.status || 'inactive'; document.getElementById('eventType').value = eventBannerData.type || 'text'; document.getElementById('eventContentInput').value = eventBannerData.content || ''; document.getElementById('eventTimeInput').value = eventBannerData.targetTime || ''; toggleEventFields(); }
         }
 
         let tempReorderArray = [];
-
         function renderReorderList() {
             const cat = document.getElementById('reorderCategorySelect').value;
-            const container = document.getElementById('reorderListContainer');
-            container.innerHTML = '';
-
-            if (cat === 'videos' || cat === 'live' || cat === 'playlists') {
-                tempReorderArray = cachedMediaItems.filter(i => i.category === cat);
-            } else if (cat === 'types') {
-                tempReorderArray = [...customTypesList];
-            } else if (cat === 'reciters') {
-                tempReorderArray = [...customRecitersList];
-            } else if (cat === 'years') {
-                tempReorderArray = [...customYearsList];
-            }
-
-            if (tempReorderArray.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#777; padding:10px;">لا يوجد عناصر للترتيب.</p>';
-                return;
-            }
-
-            tempReorderArray.forEach((item, index) => {
-                const title = typeof item === 'string' ? item : item.title;
-                const div = document.createElement('div');
-                div.className = 'manage-item';
-                div.innerHTML = `
-                    <span>${index + 1}. ${title}</span>
-                    <div class="reorder-btn-group">
-                        <button class="btn-arrow" onclick="moveReorderItem(${index}, -1)">▲ للأعلى</button>
-                        <button class="btn-arrow" onclick="moveReorderItem(${index}, 1)">▼ للأسفل</button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
+            const container = document.getElementById('reorderListContainer'); container.innerHTML = '';
+            if (cat === 'videos' || cat === 'live' || cat === 'playlists') tempReorderArray = cachedMediaItems.filter(i => i.category === cat);
+            else if (cat === 'types') tempReorderArray = [...customTypesList]; else if (cat === 'reciters') tempReorderArray = [...customRecitersList]; else if (cat === 'years') tempReorderArray = [...customYearsList];
+            if (tempReorderArray.length === 0) { container.innerHTML = '<p style="text-align:center; color:#777; padding:10px;">لا يوجد عناصر للترتيب.</p>'; return; }
+            tempReorderArray.forEach((item, index) => { const title = typeof item === 'string' ? item : item.title; const div = document.createElement('div'); div.className = 'manage-item'; div.innerHTML = `<span>${index + 1}. ${title}</span><div class="reorder-btn-group"><button class="btn-arrow" onclick="moveReorderItem(${index}, -1)">▲ للأعلى</button><button class="btn-arrow" onclick="moveReorderItem(${index}, 1)">▼ للأسفل</button></div>`; container.appendChild(div); });
         }
-
-        function moveReorderItem(index, direction) {
-            const newIndex = index + direction;
-            if (newIndex < 0 || newIndex >= tempReorderArray.length) return;
-
-            const temp = tempReorderArray[index];
-            tempReorderArray[index] = tempReorderArray[newIndex];
-            tempReorderArray[newIndex] = temp;
-
-            renderReorderList();
-        }
-
+        function moveReorderItem(index, direction) { const newIndex = index + direction; if (newIndex < 0 || newIndex >= tempReorderArray.length) return; const temp = tempReorderArray[index]; tempReorderArray[index] = tempReorderArray[newIndex]; tempReorderArray[newIndex] = temp; renderReorderList(); }
         function saveNewOrder() {
             const cat = document.getElementById('reorderCategorySelect').value;
-
-            if (cat === 'videos' || cat === 'live' || cat === 'playlists') {
-                const otherItems = cachedMediaItems.filter(i => i.category !== cat);
-                cachedMediaItems = [...tempReorderArray, ...otherItems];
-            } else if (cat === 'types') {
-                customTypesList = [...tempReorderArray];
-            } else if (cat === 'reciters') {
-                customRecitersList = [...tempReorderArray];
-            } else if (cat === 'years') {
-                customYearsList = [...tempReorderArray];
-            }
-
-            syncOnlineData(() => {
-                alert("تم حفظ الترتيب الجديد بنجاح أونلاين! 🚀");
-            });
+            if (cat === 'videos' || cat === 'live' || cat === 'playlists') cachedMediaItems = [...tempReorderArray, ...cachedMediaItems.filter(i => i.category !== cat)];
+            else if (cat === 'types') customTypesList = [...tempReorderArray]; else if (cat === 'reciters') customRecitersList = [...tempReorderArray]; else if (cat === 'years') customYearsList = [...tempReorderArray];
+            syncOnlineData(() => { alert("تم حفظ الترتيب الجديد بنجاح أونلاين! 🚀"); });
         }
 
-        function getYoutubeId(url) {
-            if (!url) return null;
-            if (url.includes('youtu.be/')) return url.split('youtu.be/')[1].split('?')[0];
-            if (url.includes('youtube.com/watch')) return new URLSearchParams(url.split('?')[1]).get('v');
-            if (url.includes('youtube.com/embed/')) return url.split('youtube.com/embed/')[1].split('?')[0];
-            return null;
-        }
+        function getYoutubeId(url) { if (!url) return null; if (url.includes('youtu.be/')) return url.split('youtu.be/')[1].split('?')[0]; if (url.includes('youtube.com/watch')) return new URLSearchParams(url.split('?')[1]).get('v'); if (url.includes('youtube.com/embed/')) return url.split('youtube.com/embed/')[1].split('?')[0]; return null; }
 
         function saveMedia() {
-            const editId = document.getElementById('editingItemId').value;
-            const category = document.getElementById('mediaCategory').value;
-            const title = document.getElementById('mediaTitle').value.trim();
-            let thumbUrl = document.getElementById('thumbUrl').value.trim();
-            const videoUrl = document.getElementById('videoUrl').value.trim();
-            const audioUrl = document.getElementById('audioUrl').value.trim();
-            const playlistId = document.getElementById('mediaPlaylistId').value;
-
-            if (!title) { alert('يرجى إدخال العنوان!'); return; }
-            if (category !== 'playlists' && !videoUrl) { alert('يرجى إضافة الرابط المطلوب!'); return; }
-
+            const editId = document.getElementById('editingItemId').value; const category = document.getElementById('mediaCategory').value; const title = document.getElementById('mediaTitle').value.trim();
+            let thumbUrl = document.getElementById('thumbUrl').value.trim(); const videoUrl = document.getElementById('videoUrl').value.trim(); const audioUrl = document.getElementById('audioUrl').value.trim(); const playlistId = document.getElementById('mediaPlaylistId').value;
+            if (!title) { alert('يرجى إدخال العنوان!'); return; } if (category !== 'playlists' && !videoUrl) { alert('يرجى إضافة الرابط المطلوب!'); return; }
             let type = '', timeDay = '', month = '', year = '', location = '', reciter = '', fullDateText = '';
-
             if (category === 'videos') {
-                const typeSel = document.getElementById('mediaTypeSelect').value;
-                type = (typeSel === '__NEW__') ? document.getElementById('customTypeInput').value.trim() : typeSel;
-                if (type && !customTypesList.includes(type)) customTypesList.push(type);
-
-                timeDay = document.getElementById('mediaTimeDay').value.trim();
-                month = document.getElementById('mediaHijriMonthSelect').value;
-
-                const yearSel = document.getElementById('mediaHijriYearSelect').value;
-                year = (yearSel === '__NEW__') ? document.getElementById('customYearInput').value.trim() : yearSel;
-                if (year && !customYearsList.includes(year)) customYearsList.push(year);
-
+                const typeSel = document.getElementById('mediaTypeSelect').value; type = (typeSel === '__NEW__') ? document.getElementById('customTypeInput').value.trim() : typeSel; if (type && !customTypesList.includes(type)) customTypesList.push(type);
+                timeDay = document.getElementById('mediaTimeDay').value.trim(); month = document.getElementById('mediaHijriMonthSelect').value;
+                const yearSel = document.getElementById('mediaHijriYearSelect').value; year = (yearSel === '__NEW__') ? document.getElementById('customYearInput').value.trim() : yearSel; if (year && !customYearsList.includes(year)) customYearsList.push(year);
                 location = document.getElementById('mediaLocation').value.trim() || 'حسينية الشعباوي في البصرة';
-
-                const reciterSel = document.getElementById('mediaReciterSelect').value;
-                reciter = (reciterSel === '__NEW__') ? document.getElementById('customReciterInput').value.trim() : reciterSel;
-                if (reciter && !customRecitersList.includes(reciter)) customRecitersList.push(reciter);
-
+                const reciterSel = document.getElementById('mediaReciterSelect').value; reciter = (reciterSel === '__NEW__') ? document.getElementById('customReciterInput').value.trim() : reciterSel; if (reciter && !customRecitersList.includes(reciter)) customRecitersList.push(reciter);
                 fullDateText = buildFullDateText(timeDay, month, year);
             }
-
-            const ytId = getYoutubeId(videoUrl);
-            if (!thumbUrl && ytId) thumbUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-
+            const ytId = getYoutubeId(videoUrl); if (!thumbUrl && ytId) thumbUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
             document.getElementById('saveBtn').innerText = "جاري الحفظ أونلاين...";
-
             if (editId) {
-                const targetId = parseInt(editId);
-                const existing = cachedMediaItems.find(i => i.id === targetId);
-                if (existing) {
-                    existing.category = category; existing.type = type; existing.timeDay = timeDay;
-                    existing.month = month; existing.year = year; existing.title = title;
-                    existing.dateText = fullDateText; existing.location = location; existing.reciter = reciter;
-                    existing.thumbUrl = thumbUrl; existing.videoUrl = videoUrl; existing.audioUrl = audioUrl;
-                    existing.playlistId = playlistId ? parseInt(playlistId) : null;
-                }
-            } else {
-                const newId = Date.now();
-                const videoItem = {
-                    id: newId, category: category, type: type, timeDay: timeDay, month: month,
-                    year: year, title: title, dateText: fullDateText, location: location,
-                    reciter: reciter, thumbUrl: thumbUrl, videoUrl: videoUrl, audioUrl: audioUrl,
-                    playlistId: playlistId ? parseInt(playlistId) : null
-                };
-                cachedMediaItems.unshift(videoItem);
-            }
-
-            syncOnlineData(() => {
-                resetAdminForm();
-                closeAdmin();
-                alert("تم النشر بنجاح! 🚀");
-            });
+                const existing = cachedMediaItems.find(i => i.id === parseInt(editId));
+                if (existing) { Object.assign(existing, { category, type, timeDay, month, year, title, dateText: fullDateText, location, reciter, thumbUrl, videoUrl, audioUrl, playlistId: playlistId ? parseInt(playlistId) : null }); }
+            } else cachedMediaItems.unshift({ id: Date.now(), category, type, timeDay, month, year, title, dateText: fullDateText, location, reciter, thumbUrl, videoUrl, audioUrl, playlistId: playlistId ? parseInt(playlistId) : null });
+            syncOnlineData(() => { resetAdminForm(); closeAdmin(); alert("تم النشر بنجاح! 🚀"); });
         }
 
         function resetAdminForm() {
-            document.getElementById('editingItemId').value = "";
-            document.getElementById('mediaCategory').value = "videos";
-            document.getElementById('customTypeGroup').style.display = "none";
-            document.getElementById('customReciterGroup').style.display = "none";
-            document.getElementById('customYearGroup').style.display = "none";
-            document.getElementById('mediaTimeDay').value = "";
-            document.getElementById('mediaTitle').value = "";
-            document.getElementById('mediaLocation').value = "";
-            document.getElementById('customTypeInput').value = "";
-            document.getElementById('customReciterInput').value = "";
-            document.getElementById('customYearInput').value = "";
-            document.getElementById('thumbUrl').value = "";
-            document.getElementById('videoUrl').value = "";
-            document.getElementById('audioUrl').value = "";
-            document.getElementById('mediaPlaylistId').value = "";
-            document.getElementById('formTitle').innerText = "إضافة محتوى جديد";
-            document.getElementById('saveBtn').innerText = "نشر أونلاين فوراً ⚡";
-            document.getElementById('cancelEditBtn').style.display = "none";
-            toggleAdminFormFields();
+            ['editingItemId','mediaTimeDay','mediaTitle','mediaLocation','customTypeInput','customReciterInput','customYearInput','thumbUrl','videoUrl','audioUrl','mediaPlaylistId'].forEach(id => document.getElementById(id).value = "");
+            document.getElementById('mediaCategory').value = "videos"; ['customTypeGroup','customReciterGroup','customYearGroup'].forEach(id => document.getElementById(id).style.display = "none");
+            document.getElementById('formTitle').innerText = "إضافة محتوى جديد"; document.getElementById('saveBtn').innerText = "نشر أونلاين فوراً ⚡"; document.getElementById('cancelEditBtn').style.display = "none"; toggleAdminFormFields();
         }
 
         function openPlaylist(playlistId) { activePlaylistId = playlistId; loadMedia(); }
 
         function loadMedia(searchQuery = '') {
-            const container = document.getElementById('videoContainer');
-            container.innerHTML = '';
-
+            const container = document.getElementById('videoContainer'); container.innerHTML = '';
             if (currentCategory === 'playlists' && activePlaylistId) {
                 const pl = cachedMediaItems.find(i => i.id === activePlaylistId);
-                const backBtn = document.createElement('div');
-                backBtn.className = 'playlist-header-back';
-                backBtn.innerHTML = `<span>❯ العودة لقوائم التشغيل</span> <span style="margin-right:auto; color:#a3c2a8;">${pl ? pl.title : ''}</span>`;
-                backBtn.onclick = () => { activePlaylistId = null; loadMedia(); };
-                container.appendChild(backBtn);
-
+                const backBtn = document.createElement('div'); backBtn.className = 'playlist-header-back'; backBtn.innerHTML = `<span>❯ العودة لقوائم التشغيل</span> <span style="margin-right:auto; color:#a3c2a8;">${pl ? pl.title : ''}</span>`; backBtn.onclick = () => { activePlaylistId = null; loadMedia(); }; container.appendChild(backBtn);
                 let items = cachedMediaItems.filter(item => item.playlistId === activePlaylistId);
-                if (items.length === 0) {
-                    container.innerHTML += '<p style="text-align: center; color: #888; margin-top: 30px;">لا توجد فيديوهات في هذه القائمة.</p>';
-                    return;
-                }
-                items.forEach(item => renderCard(item, container));
-                return;
+                if (items.length === 0) container.innerHTML += '<p style="text-align: center; color: #888; margin-top: 30px;">لا توجد فيديوهات في هذه القائمة.</p>'; else items.forEach(item => renderCard(item, container)); return;
             }
-
-            let items = [];
-            if (currentCategory === 'audio') {
-                items = cachedMediaItems.filter(item => item.audioUrl && item.audioUrl.trim() !== '');
-            } else {
-                items = cachedMediaItems.filter(item => (item.category || 'videos') === currentCategory);
-            }
-
+            let items = currentCategory === 'audio' ? cachedMediaItems.filter(item => item.audioUrl && item.audioUrl.trim() !== '') : cachedMediaItems.filter(item => (item.category || 'videos') === currentCategory);
             if (currentCategory === 'videos' || currentCategory === 'audio') {
                 items = items.filter(i => {
-                    const matchesMonth = selectedFilters.months.length === 0 || 
-                        (i.month && selectedFilters.months.includes(i.month)) ||
-                        (i.dateText && selectedFilters.months.some(m => i.dateText.includes(m)));
-
-                    const matchesYear = selectedFilters.years.length === 0 || 
-                        (i.year && selectedFilters.years.includes(i.year)) ||
-                        (i.dateText && selectedFilters.years.some(y => i.dateText.includes(y)));
-
+                    const matchesMonth = selectedFilters.months.length === 0 || (i.month && selectedFilters.months.includes(i.month)) || (i.dateText && selectedFilters.months.some(m => i.dateText.includes(m)));
+                    const matchesYear = selectedFilters.years.length === 0 || (i.year && selectedFilters.years.includes(i.year)) || (i.dateText && selectedFilters.years.some(y => i.dateText.includes(y)));
                     const matchesType = selectedFilters.types.length === 0 || selectedFilters.types.includes(i.type);
-
                     const matchesReciter = selectedFilters.reciters.length === 0 || selectedFilters.reciters.includes(i.reciter);
-
                     return matchesMonth && matchesYear && matchesType && matchesReciter;
                 });
             }
-
-            if (searchQuery) {
-                items = items.filter(i => i.title.toLowerCase().includes(searchQuery.toLowerCase()) || (i.reciter && i.reciter.toLowerCase().includes(searchQuery.toLowerCase())));
-            }
-
-            if (items.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: #888; margin-top: 30px;">لا يوجد محتوى يطابق الفلتر أو البحث الحالي.</p>';
-                return;
-            }
-
-            items.forEach(item => renderCard(item, container));
+            if (searchQuery) items = items.filter(i => i.title.toLowerCase().includes(searchQuery.toLowerCase()) || (i.reciter && i.reciter.toLowerCase().includes(searchQuery.toLowerCase())));
+            if (items.length === 0) container.innerHTML = '<p style="text-align: center; color: #888; margin-top: 30px;">لا يوجد محتوى يطابق الفلتر أو البحث الحالي.</p>'; else items.forEach(item => renderCard(item, container));
         }
 
         function renderCard(item, container) {
-            const card = document.createElement('div');
-            card.className = 'custom-card';
-
-            const ytId = getYoutubeId(item.videoUrl);
-            let thumbSrc = item.thumbUrl;
-            if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-            if (!thumbSrc) thumbSrc = 'https://via.placeholder.com/150x150/1a1a1a/ffffff?text=شعار';
-
+            const card = document.createElement('div'); card.className = 'custom-card';
+            const ytId = getYoutubeId(item.videoUrl); let thumbSrc = item.thumbUrl; if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`; if (!thumbSrc) thumbSrc = 'https://via.placeholder.com/150x150/1a1a1a/ffffff?text=شعار';
             if (item.category === 'playlists') {
                 const count = cachedMediaItems.filter(i => i.playlistId === item.id).length;
-                card.innerHTML = `
-                    <div class="card-content-left">
-                        <div class="card-header-row"><span class="card-arrow">📑</span><div class="card-title-text">${item.title}</div></div>
-                        <div class="card-date-text">تضم ${count} فيديو</div>
-                    </div>
-                    <div class="card-thumb-right"><img src="${thumbSrc}" loading="lazy" alt="thumbnail"></div>
-                `;
+                card.innerHTML = `<div class="card-content-left"><div class="card-header-row"><span class="card-arrow">📑</span><div class="card-title-text">${item.title}</div></div><div class="card-date-text">تضم ${count} فيديو</div></div><div class="card-thumb-right"><img src="${thumbSrc}" loading="lazy" alt="thumbnail"></div>`;
                 card.onclick = () => openPlaylist(item.id);
             } else {
                 const typeLabel = currentCategory === 'audio' ? 'صوتية 🎧' : 'فيديو 🎬';
-                
-                card.innerHTML = `
-                    <div class="card-content-left">
-                        <div class="card-header-row"><span class="card-arrow">⌄</span><div class="card-title-text">${item.title}</div></div>
-                        ${item.dateText ? `<div class="card-date-text">${item.dateText}</div>` : ''}
-                        <div class="card-middle-row">
-                            <span class="card-play-btn">${currentCategory === 'audio' ? '🎧' : '►'}</span>
-                            ${item.location ? `<div class="card-location-text">${item.location}</div>` : ''}
-                        </div>
-                        ${item.reciter ? `<div class="card-reciter-text">القارئ: ${item.reciter}</div>` : ''}
-                        
-                        <div class="card-actions-row">
-                            <button class="btn-card-details" onclick="openDetailsModal(${item.id}, event)">عرض التفاصيل 👁️</button>
-                            <span class="badge-card-type">${typeLabel}</span>
-                        </div>
-                    </div>
-                    <div class="card-thumb-right"><img src="${thumbSrc}" loading="lazy" alt="thumbnail"></div>
-                `;
-                card.onclick = () => {
-                    if (currentCategory === 'audio') playBackgroundAudio(item);
-                    else playVideo(item);
-                };
+                card.innerHTML = `<div class="card-content-left"><div class="card-header-row"><span class="card-arrow">⌄</span><div class="card-title-text">${item.title}</div></div>${item.dateText ? `<div class="card-date-text">${item.dateText}</div>` : ''}<div class="card-middle-row"><span class="card-play-btn">${currentCategory === 'audio' ? '🎧' : '►'}</span>${item.location ? `<div class="card-location-text">${item.location}</div>` : ''}</div>${item.reciter ? `<div class="card-reciter-text">القارئ: ${item.reciter}</div>` : ''}<div class="card-actions-row"><button class="btn-card-details" onclick="openDetailsModal(${item.id}, event)">عرض التفاصيل 👁️</button><span class="badge-card-type">${typeLabel}</span></div></div><div class="card-thumb-right"><img src="${thumbSrc}" loading="lazy" alt="thumbnail"></div>`;
+                card.onclick = () => { if (currentCategory === 'audio') playBackgroundAudio(item); else playVideo(item); };
             }
             container.appendChild(card);
         }
 
-        // الأكواد الجديدة للتحكم بالصوتيات 
-        const audioPlayerElem = document.getElementById('globalAudioPlayer');
-        const progressBar = document.getElementById('audioProgressBar');
-        const currentTimeElem = document.getElementById('audioCurrentTime');
-        const durationElem = document.getElementById('audioDuration');
-        const fullPlayBtn = document.getElementById('fullPlayPauseBtn');
-
-        audioPlayerElem.addEventListener('timeupdate', () => {
-            if (audioPlayerElem.duration) {
-                progressBar.max = audioPlayerElem.duration;
-                progressBar.value = audioPlayerElem.currentTime;
-                currentTimeElem.innerText = formatTime(audioPlayerElem.currentTime);
-                durationElem.innerText = formatTime(audioPlayerElem.duration);
-            }
-        });
-
-        audioPlayerElem.addEventListener('play', () => fullPlayBtn.innerText = '⏸');
-        audioPlayerElem.addEventListener('pause', () => fullPlayBtn.innerText = '▶');
-
-        function formatTime(seconds) {
-            let min = Math.floor(seconds / 60);
-            let sec = Math.floor(seconds % 60);
-            if (sec < 10) sec = '0' + sec;
-            return min + ':' + sec;
-        }
-
-        function seekAudio() {
-            audioPlayerElem.currentTime = progressBar.value;
-        }
-
-        function skipAudio(sec) {
-            audioPlayerElem.currentTime += sec;
-        }
-
-        function toggleFullPlayPause() {
-            if (audioPlayerElem.paused) audioPlayerElem.play();
-            else audioPlayerElem.pause();
-        }
-
-        function prevNextAudio(action) {
-            alert("سيتم برمجة الانتقال للمقطع التالي/السابق لاحقاً حسب القائمة");
-        }
-
-        function openFullAudioPlayer() {
-            document.getElementById('fullAudioOverlay').style.display = 'flex';
-        }
-
-        function closeFullAudioPlayer() {
-            document.getElementById('fullAudioOverlay').style.display = 'none';
-        }
-
-        // الدالة المعدلة لتشغيل الصوت ونقل بياناته للنافذة
-        function playBackgroundAudio(item) {
-            const stickyBar = document.getElementById('stickyAudioPlayer');
-            const audioPlayer = document.getElementById('globalAudioPlayer');
-            
-            const ytId = getYoutubeId(item.videoUrl);
-            let thumbSrc = item.thumbUrl;
-            if (!thumbSrc && ytId) thumbSrc = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-            if (!thumbSrc) thumbSrc = 'https://e.top4top.io/p_3874hbdrg1.jpg';
-
-            document.getElementById('audioTitleDisplay').innerText = item.title;
-            
-            // تحديث بيانات النافذة الكاملة
-            document.getElementById('fullAudioImg').src = thumbSrc;
-            document.getElementById('fullAudioTitle').innerText = item.title;
-            document.getElementById('fullAudioDate').innerText = item.dateText || "";
-            document.getElementById('fullAudioReciter').innerText = item.reciter ? `القارئ: ${item.reciter}` : (item.location || "");
-
-            audioPlayer.src = item.audioUrl || item.videoUrl;
-            stickyBar.style.display = 'flex';
-            
-            updateMediaSession(item, thumbSrc);
-            audioPlayer.play();
-        }
-
-        function closeAudioPlayer() {
-            document.getElementById('globalAudioPlayer').pause();
-            document.getElementById('stickyAudioPlayer').style.display = 'none';
-        }
-
         function playVideo(item) {
             if (!item.videoUrl) return;
-            const playerModal = document.getElementById('playerModal');
-            const videoElem = document.getElementById('mainVideo');
-            const iframeElem = document.getElementById('youtubeIframe');
-            const ytId = getYoutubeId(item.videoUrl);
-
+            const playerModal = document.getElementById('playerModal'); const videoElem = document.getElementById('mainVideo'); const iframeElem = document.getElementById('youtubeIframe'); const ytId = getYoutubeId(item.videoUrl);
             document.getElementById('playerTitle').innerText = item.title;
-
-            if (ytId) {
-                videoElem.style.display = 'none';
-                iframeElem.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1`;
-                iframeElem.style.display = 'block';
-            } else {
-                iframeElem.src = '';
-                iframeElem.style.display = 'none';
-                videoElem.src = item.videoUrl;
-                videoElem.style.display = 'block';
-                videoElem.play();
-            }
+            if (ytId) { videoElem.style.display = 'none'; iframeElem.src = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1`; iframeElem.style.display = 'block'; }
+            else { iframeElem.src = ''; iframeElem.style.display = 'none'; videoElem.src = item.videoUrl; videoElem.style.display = 'block'; videoElem.play(); }
             playerModal.style.display = 'flex';
         }
 
-        function closePlayer() {
-            document.getElementById('mainVideo').pause();
-            document.getElementById('mainVideo').src = '';
-            document.getElementById('youtubeIframe').src = '';
-            document.getElementById('playerModal').style.display = 'none';
-        }
-
-        function toggleFullscreen() {
-            const videoElem = document.getElementById('mainVideo');
-            const iframeElem = document.getElementById('youtubeIframe');
-            const target = videoElem.style.display !== 'none' ? videoElem : iframeElem;
-            if (target.requestFullscreen) target.requestFullscreen();
-        }
+        function closePlayer() { document.getElementById('mainVideo').pause(); document.getElementById('mainVideo').src = ''; document.getElementById('youtubeIframe').src = ''; document.getElementById('playerModal').style.display = 'none'; }
 
         function filterManageList(type) {
-            const isEdit = type === 'edit';
-            const query = (document.getElementById(isEdit ? 'editSearchInput' : 'deleteSearchInput').value || '').toLowerCase();
-            const container = document.getElementById(isEdit ? 'editListContainer' : 'deleteListContainer');
-            container.innerHTML = '';
-
+            const isEdit = type === 'edit'; const query = (document.getElementById(isEdit ? 'editSearchInput' : 'deleteSearchInput').value || '').toLowerCase(); const container = document.getElementById(isEdit ? 'editListContainer' : 'deleteListContainer'); container.innerHTML = '';
             if (isEdit) {
-                const filtered = cachedMediaItems.filter(i => i.title.toLowerCase().includes(query));
-                filtered.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'manage-item';
-                    div.innerHTML = `
-                        <span>[${item.category}] ${item.title}</span>
-                        <div>
-                            <button class="btn-warning" onclick="prepareEdit(${item.id})">تعديل ✏️</button>
-                        </div>
-                    `;
-                    container.appendChild(div);
-                });
+                cachedMediaItems.filter(i => i.title.toLowerCase().includes(query)).forEach(item => { const div = document.createElement('div'); div.className = 'manage-item'; div.innerHTML = `<span>[${item.category}] ${item.title}</span><div><button class="btn-warning" onclick="prepareEdit(${item.id})">تعديل ✏️</button></div>`; container.appendChild(div); });
             } else {
                 const deleteCat = document.getElementById('deleteCategorySelect').value;
-                if (deleteCat === 'items') {
-                    const filtered = cachedMediaItems.filter(i => i.title.toLowerCase().includes(query));
-                    filtered.forEach(item => {
-                        const div = document.createElement('div');
-                        div.className = 'manage-item';
-                        div.innerHTML = `
-                            <span>[${item.category}] ${item.title}</span>
-                            <button class="btn-danger" onclick="deleteItem(${item.id}, 'items')">حذف 🗑️</button>
-                        `;
-                        container.appendChild(div);
-                    });
-                } else if (deleteCat === 'types') {
-                    const filtered = customTypesList.filter(t => t.toLowerCase().includes(query));
-                    filtered.forEach(typeItem => {
-                        const div = document.createElement('div');
-                        div.className = 'manage-item';
-                        div.innerHTML = `
-                            <span>${typeItem}</span>
-                            <button class="btn-danger" onclick="deleteItem('${typeItem}', 'types')">حذف 🗑️</button>
-                        `;
-                        container.appendChild(div);
-                    });
-                } else if (deleteCat === 'reciters') {
-                    const filtered = customRecitersList.filter(r => r.toLowerCase().includes(query));
-                    filtered.forEach(reciterItem => {
-                        const div = document.createElement('div');
-                        div.className = 'manage-item';
-                        div.innerHTML = `
-                            <span>${reciterItem}</span>
-                            <button class="btn-danger" onclick="deleteItem('${reciterItem}', 'reciters')">حذف 🗑️</button>
-                        `;
-                        container.appendChild(div);
-                    });
-                } else if (deleteCat === 'years') {
-                    const filtered = customYearsList.filter(y => y.toLowerCase().includes(query));
-                    filtered.forEach(yearItem => {
-                        const div = document.createElement('div');
-                        div.className = 'manage-item';
-                        div.innerHTML = `
-                            <span>${yearItem}</span>
-                            <button class="btn-danger" onclick="deleteItem('${yearItem}', 'years')">حذف 🗑️</button>
-                        `;
-                        container.appendChild(div);
-                    });
-                }
+                if (deleteCat === 'items') cachedMediaItems.filter(i => i.title.toLowerCase().includes(query)).forEach(item => { const div = document.createElement('div'); div.className = 'manage-item'; div.innerHTML = `<span>[${item.category}] ${item.title}</span><button class="btn-danger" onclick="deleteItem(${item.id}, 'items')">حذف 🗑️</button>`; container.appendChild(div); });
+                else if (deleteCat === 'types') customTypesList.filter(t => t.toLowerCase().includes(query)).forEach(t => { const div = document.createElement('div'); div.className = 'manage-item'; div.innerHTML = `<span>${t}</span><button class="btn-danger" onclick="deleteItem('${t}', 'types')">حذف 🗑️</button>`; container.appendChild(div); });
+                else if (deleteCat === 'reciters') customRecitersList.filter(r => r.toLowerCase().includes(query)).forEach(r => { const div = document.createElement('div'); div.className = 'manage-item'; div.innerHTML = `<span>${r}</span><button class="btn-danger" onclick="deleteItem('${r}', 'reciters')">حذف 🗑️</button>`; container.appendChild(div); });
+                else if (deleteCat === 'years') customYearsList.filter(y => y.toLowerCase().includes(query)).forEach(y => { const div = document.createElement('div'); div.className = 'manage-item'; div.innerHTML = `<span>${y}</span><button class="btn-danger" onclick="deleteItem('${y}', 'years')">حذف 🗑️</button>`; container.appendChild(div); });
             }
         }
 
         function prepareEdit(id) {
-            const item = cachedMediaItems.find(i => i.id === id);
-            if (!item) return;
-
-            if (item.type && item.type.trim() && !customTypesList.includes(item.type.trim())) {
-                customTypesList.push(item.type.trim());
-            }
-            if (item.year && item.year.trim() && !customYearsList.includes(item.year.trim())) {
-                customYearsList.push(item.year.trim());
-            }
-            if (item.reciter && item.reciter.trim() && !customRecitersList.includes(item.reciter.trim())) {
-                customRecitersList.push(item.reciter.trim());
-            }
-
-            document.getElementById('editingItemId').value = item.id;
-            document.getElementById('mediaCategory').value = item.category || "videos";
-            
-            toggleAdminFormFields();
-
-            document.getElementById('mediaTypeSelect').value = item.type || "";
-            document.getElementById('mediaTimeDay').value = item.timeDay || "";
-            document.getElementById('mediaHijriMonthSelect').value = item.month || "";
-            document.getElementById('mediaHijriYearSelect').value = item.year || "";
-            document.getElementById('mediaTitle').value = item.title;
-            document.getElementById('mediaLocation').value = item.location || "";
-            document.getElementById('mediaReciterSelect').value = item.reciter || "";
-            document.getElementById('thumbUrl').value = item.thumbUrl || "";
-            document.getElementById('videoUrl').value = item.videoUrl || "";
-            document.getElementById('audioUrl').value = item.audioUrl || "";
-            document.getElementById('mediaPlaylistId').value = item.playlistId || "";
-            
-            document.getElementById('formTitle').innerText = "✏️ تعديل المحتوى";
-            document.getElementById('saveBtn').innerText = "حفظ التعديلات ⚡";
-            document.getElementById('cancelEditBtn').style.display = "block";
-
-            switchAdminTab('add');
+            const item = cachedMediaItems.find(i => i.id === id); if (!item) return;
+            if (item.type && item.type.trim() && !customTypesList.includes(item.type.trim())) customTypesList.push(item.type.trim());
+            if (item.year && item.year.trim() && !customYearsList.includes(item.year.trim())) customYearsList.push(item.year.trim());
+            if (item.reciter && item.reciter.trim() && !customRecitersList.includes(item.reciter.trim())) customRecitersList.push(item.reciter.trim());
+            document.getElementById('editingItemId').value = item.id; document.getElementById('mediaCategory').value = item.category || "videos"; toggleAdminFormFields();
+            ['mediaTypeSelect','mediaTimeDay','mediaHijriMonthSelect','mediaHijriYearSelect','mediaTitle','mediaLocation','mediaReciterSelect','thumbUrl','videoUrl','audioUrl','mediaPlaylistId'].forEach(field => {
+                let val = item[field.replace('media','').replace('Select','').toLowerCase()];
+                if(field === 'mediaTitle') val = item.title; else if(field === 'mediaLocation') val = item.location; else if(field === 'mediaTimeDay') val = item.timeDay; else if(field === 'mediaPlaylistId') val = item.playlistId;
+                if(document.getElementById(field)) document.getElementById(field).value = val || "";
+            });
+            document.getElementById('formTitle').innerText = "✏️ تعديل المحتوى"; document.getElementById('saveBtn').innerText = "حفظ التعديلات ⚡"; document.getElementById('cancelEditBtn').style.display = "block"; switchAdminTab('add');
         }
 
         function deleteItem(target, targetType) {
-            if (confirm('هل أنت متأكد من حذف هذا العنصر نهائياً؟')) {
-                if (targetType === 'items') {
-                    cachedMediaItems = cachedMediaItems.filter(i => i.id !== target);
-                } else if (targetType === 'types') {
-                    customTypesList = customTypesList.filter(t => t !== target);
-                } else if (targetType === 'reciters') {
-                    customRecitersList = customRecitersList.filter(r => r !== target);
-                } else if (targetType === 'years') {
-                    customYearsList = customYearsList.filter(y => y !== target);
-                }
-
-                syncOnlineData(() => {
-                    filterManageList('delete');
-                });
+            if (confirm('هل أنت متأكد من الحذف؟')) {
+                if (targetType === 'items') cachedMediaItems = cachedMediaItems.filter(i => i.id !== target); else if (targetType === 'types') customTypesList = customTypesList.filter(t => t !== target); else if (targetType === 'reciters') customRecitersList = customRecitersList.filter(r => r !== target); else if (targetType === 'years') customYearsList = customYearsList.filter(y => y !== target);
+                syncOnlineData(() => filterManageList('delete'));
             }
         }
-
-        function searchMedia() {
-            const query = document.getElementById('searchInput').value.trim();
-            if (query !== 'kokoko') loadMedia(query);
-        }
+        function searchMedia() { const query = document.getElementById('searchInput').value.trim(); if (query !== 'kokoko') loadMedia(query); }
     </script>
 </body>
-    </html>
+                </html>
